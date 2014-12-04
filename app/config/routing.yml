@@ -1,0 +1,10 @@
+inteco_ku_p_ra_fridge:
+    resource: "@IntecoKuPRaFridgeBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+inteco_ku_p_ra_default:
+    resource: "@IntecoKuPRaDefaultBundle/Controller/"
+    type:     annotation
+    prefix:   /
+

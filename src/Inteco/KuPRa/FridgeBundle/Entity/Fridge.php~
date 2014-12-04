@@ -1,0 +1,38 @@
+<?php
+
+namespace Inteco\KuPRa\FridgeBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Fridge
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Inteco\KuPRa\FridgeBundle\Entity\FridgeRepository")
+ */
+class Fridge
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User")
+     */
+    private $author;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}
