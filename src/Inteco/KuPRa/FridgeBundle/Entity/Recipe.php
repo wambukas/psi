@@ -22,7 +22,7 @@ class Recipe
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="\Inteco\KuPRa\DefaultBundle\Entity\User")
      */
     private $author;
 
@@ -157,13 +157,15 @@ class Recipe
         return $this->description;
     }
 
+
+
     /**
      * Set author
      *
-     * @param \Inteco\KuPRa\FridgeBundle\Entity\User $author
+     * @param \Inteco\KuPRa\DefaultBundle\Entity\User $author
      * @return Recipe
      */
-    public function setAuthor(\Inteco\KuPRa\FridgeBundle\Entity\User $author = null)
+    public function setAuthor(\Inteco\KuPRa\DefaultBundle\Entity\User $author = null)
     {
         $this->author = $author;
 
@@ -173,7 +175,7 @@ class Recipe
     /**
      * Get author
      *
-     * @return \Inteco\KuPRa\FridgeBundle\Entity\User 
+     * @return \Inteco\KuPRa\DefaultBundle\Entity\User 
      */
     public function getAuthor()
     {

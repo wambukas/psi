@@ -1,6 +1,9 @@
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        Inteco\KuPRa\DefaultBundle\Entity\User:
+            algorithm: sha512
+            encode-as-base64: true
+            iterations: 10
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER

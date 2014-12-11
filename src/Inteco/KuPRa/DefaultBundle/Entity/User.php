@@ -49,14 +49,14 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=255)
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
     private $address;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     private $description;
 
@@ -67,6 +67,11 @@ class User
      */
     private $role;
 
+    /**
+     * @ORM\Column(type="string", length=32)
+     */
+    protected $salt;
+    
     /**
      * @var string
      *
@@ -299,5 +304,28 @@ class User
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Set salt
+     *
+     * @param string $salt
+     * @return User
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+
+        return $this;
+    }
+
+    /**
+     * Get salt
+     *
+     * @return string 
+     */
+    public function getSalt()
+    {
+        return $this->salt;
     }
 }

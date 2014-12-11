@@ -4,13 +4,18 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
+
     <services>
-        <service id="inteco_ku_p_ra_default.example" class="Inteco\KuPRa\DefaultBundle\Example">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        <!--Repai-->
+        <service id="repository.user"
+                 class="Inteco\KuPRa\DefaultBundle\EntityRepositories\UserRepository"
+                 factory-service="doctrine" factory-method="getRepository">
+            <argument>IntecoKuPRaDefaultBundle:User</argument>
+        </service>
+        <!--Manageriai-->
+        <service id="manager.user" class="Inteco\KuPRa\DefaultBundle\Manager\UserManager" >
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
     </services>
-    -->
+
 </container>

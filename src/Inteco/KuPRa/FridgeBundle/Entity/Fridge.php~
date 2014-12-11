@@ -22,7 +22,7 @@ class Fridge
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="\Inteco\KuPRa\DefaultBundle\Entity\User")
      */
     private $author;
 
@@ -35,4 +35,6 @@ class Fridge
     {
         return $this->id;
     }
+
+
 }

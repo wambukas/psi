@@ -22,7 +22,7 @@ class Fridge
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="\Inteco\KuPRa\DefaultBundle\Entity\User")
      */
     private $author;
 
@@ -36,13 +36,15 @@ class Fridge
         return $this->id;
     }
 
+
+
     /**
      * Set author
      *
-     * @param \Inteco\KuPRa\FridgeBundle\Entity\User $author
+     * @param \Inteco\KuPRa\DefaultBundle\Entity\User $author
      * @return Fridge
      */
-    public function setAuthor(\Inteco\KuPRa\FridgeBundle\Entity\User $author = null)
+    public function setAuthor(\Inteco\KuPRa\DefaultBundle\Entity\User $author = null)
     {
         $this->author = $author;
 
@@ -52,7 +54,7 @@ class Fridge
     /**
      * Get author
      *
-     * @return \Inteco\KuPRa\FridgeBundle\Entity\User 
+     * @return \Inteco\KuPRa\DefaultBundle\Entity\User 
      */
     public function getAuthor()
     {

@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Inteco\KuPRa\DefaultBundle\IntecoKuPRaDefaultBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Inteco\KuPRa\FridgeBundle\IntecoKuPRaFridgeBundle(),
+            new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <div style="text-align:center;margin: 100px auto;height:100px;width:300px;">
+        <div id="registerBox" style="display:none">
+            <form method="post">
+            {{ form_row(regForm.nickname) }}
+            {{ form_row(regForm.name) }}
+            {{ form_row(regForm.surname) }}
+            {{ form_row(regForm.loginName) }}
+            {{ form_row(regForm.password) }}
+                <button id="login" class="btn btn-primary">Back</button>
+            {{ form_row(regForm.submit) }}
+            </form>
+        </div>
+        <div id="loginBox">
+            <form method="post">
+                {{ form_row(logForm.loginName) }}
+                {{ form_row(logForm.password) }}
+                <button id="register" class="btn btn-primary">Register</button>
+                {{ form_row(logForm.login) }}
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+            $('#register').on('click', function(e){
+                e.preventDefault();
+                $('#registerBox').show();
+                $('#loginBox').hide();
+            });
+
+            $('#login').on('click', function(e){
+                e.preventDefault();
+                $('#loginBox').show();
+                $('#registerBox').hide();
+            });
+
+    </script>
+{% endblock %}

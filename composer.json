@@ -18,7 +18,14 @@
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "doctrine/doctrine-fixtures-bundle": "2.2.*"
+        "doctrine/doctrine-fixtures-bundle": "2.2.*",
+        "cg/kint-bundle": "dev-master",
+        "knplabs/knp-menu-bundle": "2.0.*@dev",
+        "twbs/bootstrap": "v3.0.0",
+        "braincrafted/bootstrap-bundle": "dev-master",
+        "leafo/lessphp": "dev-master#85bd4557920d5f4fcbf41beb621e91b842e3621b",
+        "components/jquery": "dev-master",
+        "knplabs/knp-menu-bundle": "2.0.*@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

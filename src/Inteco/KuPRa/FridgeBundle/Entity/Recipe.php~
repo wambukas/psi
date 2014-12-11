@@ -22,7 +22,7 @@ class Recipe
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="\Inteco\KuPRa\DefaultBundle\Entity\User")
      */
     private $author;
 
@@ -156,4 +156,6 @@ class Recipe
     {
         return $this->description;
     }
+
+
 }

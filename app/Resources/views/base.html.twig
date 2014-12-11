@@ -3,11 +3,17 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% stylesheets
+            'css/bootstrap.css'
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}">{% endstylesheets %}
+        {% javascripts
+        '@IntecoKuPRaDefaultBundle/Resources/public/js/jquery-1.9.1.min.js'
+        %}<script type="text/javascript" src="{{ asset_url }}"></script>{% endjavascripts %}
+        {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block content %}{% endblock %}
     </body>
 </html>
