@@ -1,0 +1,57 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+    <div id="formHolder" style="display: inline-block;padding: 20px;width: 360px;">
+        <strong style="font-size: 30px">Atnaujinti duomenis</strong>
+        <strong id="infoSuc" style="font-size: 20px;display: none;color:lightgreen;">Sėkmingai pakeisti duomenys</strong>
+        <strong id="infoFail"  style="font-size: 20px;display: none;color:red;">Klaida keičiant duomenis</strong>
+        <form id="infoForm" method="post" action="{{ url('_change_info') }}">
+            {{ form_row(form.name) }}
+            {{ form_row(form.surname) }}
+            {{ form_row(form.address) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.image) }}
+            {{ form_row(form._token) }}
+            <button id="atnaujinti" type="submit" class="btn btn-primary">Atnaujinti</button>
+
+        </form>
+    </div>
+    <div id="formHolder2" style="display: inline-block;position: absolute;padding: 20px;width: 360px;">
+        <strong style="font-size: 30px">Pakeisti slaptažodį</strong>
+        <strong id="passSuc"  style="font-size: 20px;display: none;color:lightgreen;">Sėkmingai pakeistas slaptažodis</strong>
+        <strong id="passFail"  style="font-size: 20px;display: none;color:red;">Klaida keičiant slaptažodį</strong>
+        <form id="passForm" method="post" action="{{ url('_change_password') }}">
+
+            {{ form_row(form.password) }}
+            {{ form_row(form.Pakeisti) }}
+        </form>
+    </div>
+    <script type="text/javascript">
+        $('#inteco_kupra_defaultbundle_user_Pakeisti').on('click', function(e){
+            e.preventDefault();
+            $.post('{{ url('_change_password') }}', $('#passForm').serialize(), function (result) {
+                if (result == "OK"){
+                    $('#passSuc').show();
+                    $('#passFail').hide();
+                } else {
+                    $('#passFail').show();
+                    $('#passSuc').hide();
+                }
+                // here the "result" variable will contain the response from the server
+            });
+        });
+
+        $('#atnaujinti').on('click', function(e){
+            e.preventDefault();
+            $.post('{{ url('_change_info') }}', $('#infoForm').serialize(), function (result) {
+                if (result == "OK"){
+                    $('#infoSuc').show();
+                    $('#infoFail').hide();
+                } else {
+                    $('#infoFail').show();
+                    $('#infoSuc').hide();
+                }
+                // here the "result" variable will contain the response from the server
+            });
+        });
+    </script>
+{% endblock %}

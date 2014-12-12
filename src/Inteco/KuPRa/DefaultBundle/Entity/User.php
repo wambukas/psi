@@ -5,7 +5,6 @@ namespace Inteco\KuPRa\DefaultBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
-
 /**
  * User
  *
@@ -27,21 +26,18 @@ class User
 
     /**
      * @var string
-     *
      * @ORM\Column(name="nickname", type="string", length=255)
      */
     private $nickname;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="surname", type="string", length=255)
      */
     private $surname;
@@ -63,25 +59,23 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="role", type="string", length=255)
+     * @ORM\Column(name="role", type="string", length=255, nullable=true)
      */
     private $role;
 
     /**
-     * @ORM\Column(type="string", length=32)
+     * @ORM\Column(type="string", length=32, nullable=true)
      */
     protected $salt;
     
     /**
      * @var string
-     *
      * @ORM\Column(name="loginName", type="string", length=255)
      */
     private $loginName;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="password", type="string", length=255)
      * @Assert\NotBlank(groups={"registration"})
      */

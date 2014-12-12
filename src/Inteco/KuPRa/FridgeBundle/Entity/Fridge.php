@@ -60,4 +60,9 @@ class Fridge
     {
         return $this->author;
     }
+
+    public function __toString()
+    {
+        return $this->author->getNickname();
+    }
 }

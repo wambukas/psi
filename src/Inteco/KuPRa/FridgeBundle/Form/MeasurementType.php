@@ -17,7 +17,7 @@ class MeasurementType extends AbstractType
         $builder
             ->add('title')
             ->add('shortTitle')
-            ->add('create','submit')
+            ->add('submit','submit')
         ;
     }
     

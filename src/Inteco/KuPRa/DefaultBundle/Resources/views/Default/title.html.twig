@@ -8,6 +8,7 @@
             {{ form_row(regForm.surname) }}
             {{ form_row(regForm.loginName) }}
             {{ form_row(regForm.password) }}
+                {{ form_row(regForm._token) }}
                 <button id="login" class="btn btn-primary">Back</button>
             {{ form_row(regForm.submit) }}
             </form>
@@ -16,6 +17,7 @@
             <form method="post">
                 {{ form_row(logForm.loginName) }}
                 {{ form_row(logForm.password) }}
+                {{ form_row(logForm._token) }}
                 <button id="register" class="btn btn-primary">Register</button>
                 {{ form_row(logForm.login) }}
             </form>

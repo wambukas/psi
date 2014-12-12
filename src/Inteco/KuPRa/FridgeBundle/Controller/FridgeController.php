@@ -3,8 +3,15 @@
 namespace Inteco\KuPRa\FridgeBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
+use Inteco\KuPRa\DefaultBundle\EntityRepositories\UserRepository;
+use Inteco\KuPRa\FridgeBundle\Entity\FridgeItem;
+use Inteco\KuPRa\FridgeBundle\Entity\FridgeRepository;
 use Inteco\KuPRa\FridgeBundle\Entity\Measurement;
+use Inteco\KuPRa\FridgeBundle\Entity\Product;
+use Inteco\KuPRa\FridgeBundle\Form\FridgeItemType;
 use Inteco\KuPRa\FridgeBundle\Form\MeasurementType;
+use Inteco\KuPRa\FridgeBundle\Form\ProductType;
+use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -29,7 +36,32 @@ class FridgeController extends Controller
      */
     public function fridgeAction()
     {
-        return [];
+        $role = $this->_getUserRole();
+        $fridge = $this->_getFridge();
+        if ($fridge == NULL || $role == null){
+            return $this->redirect($this->generateUrl('_default'));
+        }
+        $em = $this->getDoctrine()->getManager();
+        $err = '';
+        $item = new FridgeItem();
+        $form = $this->createForm(new FridgeItemType(), $item);
+        if ($this->getRequest()->isMethod('POST')) {
+            $item->setFridge($fridge);
+            $form->submit($this->getRequest());
+            $check = $em->getRepository('IntecoKuPRaFridgeBundle:FridgeItem')->findOneBy(array('product' =>$item->getProduct()));
+            if ($form->isValid()) {
+                if($check != null){
+                    $check->setAmount($item->getAmount()+$check->getAmount());
+                    $em->persist($check);
+                    $em->flush();
+                } else {
+                    $em->persist($item);
+                    $em->flush();
+                }
+            }
+        }
+        $entities = $em->getRepository('IntecoKuPRaFridgeBundle:FridgeItem')->findBy(array('fridge' => $fridge));
+        return ['form' => $form->createView(), 'entities' => $entities, 'err' => $err, 'role' => $role];
     }
 
     /**
@@ -38,12 +70,15 @@ class FridgeController extends Controller
      */
     public function measurementAction()
     {
+        $role = $this->_getUserRole();
+        if($role == null){
+            return $this->redirect($this->generateUrl('_default'));
+        }
         $em = $this->getDoctrine()->getManager();
         $err = '';
         $measurement = new Measurement();
         $form = $this->createForm(new MeasurementType(), $measurement);
 
-        $entities = $em->getRepository('IntecoKuPRaFridgeBundle:Measurement')->findAll();
         if ($this->getRequest()->isMethod('POST')) {
             $form->submit($this->getRequest());
             $checkTitle = $em->getRepository('IntecoKuPRaFridgeBundle:Measurement')->findOneBy(array('title'=>$measurement->getTitle()));
@@ -57,16 +92,114 @@ class FridgeController extends Controller
                 }
             }
         }
-        return ['form' => $form->createView(), 'entities' => $entities, 'err' => $err];
+        $entities = $em->getRepository('IntecoKuPRaFridgeBundle:Measurement')->findAll();
+        return ['form' => $form->createView(), 'entities' => $entities, 'err' => $err, 'role' => $role];
+    }
+
+    /**
+     * @Route("/measurement/{id}/delete", name="_delete_measurement")
+     */
+    public function deleteMeasurementAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $measurement = $em->getRepository('IntecoKuPRaFridgeBundle:Measurement')->findOneById($id);
+        $em->remove($measurement);
+        $em->flush();
+        return $this->redirect($this->generateUrl('_measurement'));
+    }
+
+    /**
+     * @Route("/measurement/{id}/edit", name="_edit_measurement")
+     * @Template("IntecoKuPRaFridgeBundle:Fridge:measurement.html.twig")
+     */
+    public function editMeasurementAction($id)
+    {
+        $role = $this->_getUserRole();
+        $em = $this->getDoctrine()->getEntityManager();
+        $measurement = $em->getRepository('IntecoKuPRaFridgeBundle:Measurement')->findOneById($id);
+        $entities = $em->getRepository('IntecoKuPRaFridgeBundle:Measurement')->findAll();
+        if (empty($measurement) || $role != 'ROLE_ADMIN'){
+            return $this->redirect($this->generateUrl('_measurement'));
+        } else {
+            $form = $this->createForm(new MeasurementType(), $measurement)->remove('submit')->add('edit', 'submit');
+            if ($this->getRequest()->isMethod('POST')) {
+                $form->submit($this->getRequest());
+                if ($form->isValid()) {
+                    $em->persist($measurement);
+                    $em->flush();
+                    return $this->redirect($this->generateUrl('_measurement'));
+                }
+            }
+            return ['form' => $form->createView(), 'entities' => $entities, 'role' => $role, 'action' => 'edit'];
+        }
     }
 
     /**
      * @Route("/products", name="_products")
-     * @Template("IntecoKuPRaFridgeBundle:Fridge:products.html.twig")
+     * @Template("IntecoKuPRaFridgeBundle:Fridge:product.html.twig")
      */
     public function productsAction()
     {
-        return [];
+        $role = $this->_getUserRole();
+        if($role == null){
+            return $this->redirect($this->generateUrl('_default'));
+        }
+        $em = $this->getDoctrine()->getManager();
+        $err = '';
+        $product = new Product();
+        $form = $this->createForm(new ProductType(), $product);
+        if ($this->getRequest()->isMethod('POST')) {
+            $form->submit($this->getRequest());
+            $checkTitle = $em->getRepository('IntecoKuPRaFridgeBundle:Product')->findOneBy(array('title'=>$product->getTitle()));
+            if ($form->isValid()) {
+                if(empty($checkTitle)){
+                    $em->persist($product);
+                    $em->flush();
+                } else {
+                    $err = "Product exists";
+                }
+            }
+        }
+        $entities = $em->getRepository('IntecoKuPRaFridgeBundle:Product')->findAll();
+        return ['form' => $form->createView(), 'entities' => $entities, 'err' => $err, 'role' => $role];
+    }
+
+    /**
+     * @Route("/product/{id}/delete", name="_delete_product")
+     */
+    public function deleteProductAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $product = $em->getRepository('IntecoKuPRaFridgeBundle:Product')->findOneById($id);
+        $em->remove($product);
+        $em->flush();
+        return $this->redirect($this->generateUrl('_products'));
+    }
+
+    /**
+     * @Route("/product/{id}/edit", name="_edit_product")
+     * @Template("IntecoKuPRaFridgeBundle:Fridge:product.html.twig")
+     */
+    public function editProductAction($id)
+    {
+        $role = $this->_getUserRole();
+        $em = $this->getDoctrine()->getEntityManager();
+        $product = $em->getRepository('IntecoKuPRaFridgeBundle:Product')->findOneById($id);
+        if (empty($product) || $role != 'ROLE_ADMIN'){
+            return $this->redirect($this->generateUrl('_product'));
+        } else {
+            $form = $this->createForm(new ProductType(), $product)->remove('Sukurti')->add('edit', 'submit');
+            if ($this->getRequest()->isMethod('POST')) {
+                $form->submit($this->getRequest());
+                if ($form->isValid()) {
+                    $em->persist($product);
+                    $em->flush();
+                    return $this->redirect($this->generateUrl('_products'));
+                }
+            }
+            $entities = $em->getRepository('IntecoKuPRaFridgeBundle:Product')->findAll();
+            return ['form' => $form->createView(), 'entities' => $entities, 'role' => $role, 'action' => 'edit'];
+        }
     }
 
     /**
@@ -85,5 +218,40 @@ class FridgeController extends Controller
     public function menuAction()
     {
         return [];
+    }
+
+    private function _getUserRole()
+    {
+        $session = $this->get('session');
+        $userId = $session->get('user');
+        if($userId != NULL){
+            $userRepository = $this->get('repository.user');
+            $user = $userRepository->findOneBy(['id' => $userId]);
+            return $user->getRole();
+        } else {
+            return null;
+        }
+    }
+
+    private function _getFridge()
+    {
+        $session = $this->get('session');
+        $userId = $session->get('user');
+        if($userId != NULL){
+            $userRepository = $this->get('repository.user');
+            $user = $userRepository->findOneBy(['id' => $userId]);
+            $fridgeRepository = $this->get('repository.fridge');
+            $fridge = $fridgeRepository->findOneBy(array('author' => $user));
+            if ($fridge == NULL){
+                $fridge = new Fridge();
+                $fridge->setAuthor($user);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($fridge);
+                $em->flush();
+            }
+            return $fridge;
+        } else {
+            return null;
+        }
     }
 }

@@ -1,0 +1,11 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+    <div id="formHolder" style="display: inline-block;padding: 20px;width: 360px;">
+        {{ form(form) }}
+    </div>
+    <ul style="overflow-y:scroll;height: 236px;position: absolute;display: inline-block;left:380px;width: 480px" class="list-group">
+        {% for entity in entities %}
+            <li class="list-group-item">{{ entity.title }}<span style="font-size: 80%"> ({{ entity.measurement.title }})</span>{% if role == 'ROLE_ADMIN' %}<a style="float:right;" href="{{ url('_delete_product', {'id' : entity.id}) }}"><span style="color:red;">Delete</span></a><a style="float:right;padding:0 10px 0 0" href="{{ url('_edit_product', {'id' : entity.id}) }}"><span style="color:blue;">Edit</span></a>{% endif %}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

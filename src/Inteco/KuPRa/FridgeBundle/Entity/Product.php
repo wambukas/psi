@@ -40,7 +40,7 @@ class Product
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     private $description;
 
@@ -146,5 +146,10 @@ class Product
     public function getImage()
     {
         return $this->image;
+    }
+
+    public function __toString()
+    {
+        return $this->title . ' (' . $this->measurement->getTitle() .') ';
     }
 }

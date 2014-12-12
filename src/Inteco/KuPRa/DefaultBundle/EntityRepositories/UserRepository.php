@@ -21,6 +21,10 @@ class UserRepository extends EntityRepository
     {
         $session = new Session();
         $user = $this->findOneById($user = $session->get('user'));
-        return $user->getName() . ' ' . $user->getSurname();
+        if (!empty($user)){
+            return $user->getName() . ' ' . $user->getSurname();
+        } else {
+            return 'None';
+        }
     }
 }

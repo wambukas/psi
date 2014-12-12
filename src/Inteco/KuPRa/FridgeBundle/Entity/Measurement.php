@@ -91,4 +91,9 @@ class Measurement
     {
         return $this->shortTitle;
     }
+
+    public function __toString()
+    {
+        return $this->title;
+    }
 }
