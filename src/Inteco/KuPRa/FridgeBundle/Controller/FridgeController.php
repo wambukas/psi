@@ -39,7 +39,7 @@ class FridgeController extends Controller
         $role = $this->_getUserRole();
         $fridge = $this->_getFridge();
         if ($fridge == NULL || $role == null){
-            return $this->redirect($this->generateUrl('_default'));
+            return $this->redirect($this->generateUrl('_fridge'));
         }
         $em = $this->getDoctrine()->getManager();
         $err = '';
@@ -48,7 +48,7 @@ class FridgeController extends Controller
         if ($this->getRequest()->isMethod('POST')) {
             $item->setFridge($fridge);
             $form->submit($this->getRequest());
-            $check = $em->getRepository('IntecoKuPRaFridgeBundle:FridgeItem')->findOneBy(array('product' =>$item->getProduct()));
+            $check = $em->getRepository('IntecoKuPRaFridgeBundle:FridgeItem')->findOneBy(array('product' =>$item->getProduct(), 'fridge' => $fridge));
             if ($form->isValid()) {
                 if($check != null){
                     $check->setAmount($item->getAmount()+$check->getAmount());
@@ -62,6 +62,36 @@ class FridgeController extends Controller
         }
         $entities = $em->getRepository('IntecoKuPRaFridgeBundle:FridgeItem')->findBy(array('fridge' => $fridge));
         return ['form' => $form->createView(), 'entities' => $entities, 'err' => $err, 'role' => $role];
+    }
+
+    /**
+     * @Route("/{id}/edit", name="_edit_fridge")
+     * @Template("IntecoKuPRaFridgeBundle:Fridge:fridge.html.twig")
+     */
+    public function editFridgeAction($id)
+    {
+        $role = $this->_getUserRole();
+        $fridge = $this->_getFridge();
+        if ($fridge == NULL || $role == null){
+            return $this->redirect($this->generateUrl('_fridge'));
+        }
+        $em = $this->getDoctrine()->getEntityManager();
+        $item = $em->getRepository('IntecoKuPRaFridgeBundle:FridgeItem')->findOneById($id);
+        if (empty($item)){
+            return $this->redirect($this->generateUrl('_fridge'));
+        } else {
+            $form = $this->createForm(new FridgeItemType(), $item)->remove('Įdėti')->add('edit', 'submit');
+            if ($this->getRequest()->isMethod('POST')) {
+                $form->submit($this->getRequest());
+                if ($form->isValid()) {
+                    $em->persist($item);
+                    $em->flush();
+                    return $this->redirect($this->generateUrl('_fridge'));
+                }
+            }
+            $entities = $em->getRepository('IntecoKuPRaFridgeBundle:FridgeItem')->findBy(array('fridge' => $fridge));
+            return ['form' => $form->createView(), 'entities' => $entities, 'role' => $role, 'action' => 'edit'];
+        }
     }
 
     /**

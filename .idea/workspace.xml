@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8cc76b63-ef2b-4647-a7bd-6256acae463e" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/cache/.gitkeep" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/views/Fridge/products.html.twig" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/doctrine/dbal/UPGRADE" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/doctrine/dbal/bin/doctrine.php" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/doctrine/doctrine-bundle/Doctrine/Bundle/DoctrineBundle/.gitignore" afterPath="" />
@@ -182,22 +181,9 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/swiftmailer-bundle/Symfony/Bundle/SwiftmailerBundle/Tests/TestCase.php" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/swiftmailer-bundle/Symfony/Bundle/SwiftmailerBundle/composer.json" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/symfony/swiftmailer-bundle/Symfony/Bundle/SwiftmailerBundle/phpunit.xml.dist" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Inteco/KuPRa/DefaultBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/Inteco/KuPRa/DefaultBundle/Controller/DefaultController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Entity/Fridge.php" afterPath="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Entity/Fridge.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Controller/FridgeController.php" afterPath="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Controller/FridgeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Entity/Measurement.php" afterPath="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Entity/Measurement.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Form/MeasurementType.php" afterPath="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Form/MeasurementType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Entity/Product.php" afterPath="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Entity/Product.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Inteco/KuPRa/DefaultBundle/Entity/User.php" afterPath="$PROJECT_DIR$/src/Inteco/KuPRa/DefaultBundle/Entity/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Inteco/KuPRa/DefaultBundle/EntityRepositories/UserRepository.php" afterPath="$PROJECT_DIR$/src/Inteco/KuPRa/DefaultBundle/EntityRepositories/UserRepository.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/logs/dev.log" afterPath="$PROJECT_DIR$/app/logs/dev.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/views/Fridge/fridge.html.twig" afterPath="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/views/Fridge/fridge.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/layout.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/layout.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/views/Fridge/measurement.html.twig" afterPath="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/views/Fridge/measurement.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/logs/prod.log" afterPath="$PROJECT_DIR$/app/logs/prod.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/config/services.xml" afterPath="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/config/services.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Inteco/KuPRa/DefaultBundle/Resources/views/Default/title.html.twig" afterPath="$PROJECT_DIR$/src/Inteco/KuPRa/DefaultBundle/Resources/views/Default/title.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="psi.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -220,10 +206,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="FridgeController.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="FridgeController.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Controller/FridgeController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="17" selection-start="2210" selection-end="2210" vertical-scroll-proportion="-3.4252872" vertical-offset="476" max-vertical-offset="4446">
+            <state line="50" column="147" selection-start="1882" selection-end="1882" vertical-scroll-proportion="-0.42857143" vertical-offset="846" max-vertical-offset="4986">
               <folding />
             </state>
           </provider>
@@ -268,16 +254,16 @@
       <file leaf-file-name="FridgeItemType.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Form/FridgeItemType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="27" selection-start="493" selection-end="493" vertical-scroll-proportion="-10.666667" vertical-offset="0" max-vertical-offset="810">
+            <state line="19" column="24" selection-start="514" selection-end="519" vertical-scroll-proportion="-11.333333" vertical-offset="0" max-vertical-offset="810">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Product.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Product.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Entity/Product.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="141" column="17" selection-start="2572" selection-end="2572" vertical-scroll-proportion="0.38879457" vertical-offset="2273" max-vertical-offset="2862">
+            <state line="141" column="17" selection-start="2572" selection-end="2572" vertical-scroll-proportion="-8.481482" vertical-offset="2273" max-vertical-offset="2862">
               <folding />
             </state>
           </provider>
@@ -286,15 +272,13 @@
       <file leaf-file-name="fridge.html.twig" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/views/Fridge/fridge.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="157" selection-start="500" selection-end="500" vertical-scroll-proportion="-4.6666665" vertical-offset="0" max-vertical-offset="288">
+            <state line="10" column="14" selection-start="698" selection-end="698" vertical-scroll-proportion="-3.1578948" vertical-offset="0" max-vertical-offset="288">
               <folding>
                 <element signature="e#78#135#0" expanded="true" />
                 <element signature="e#181#285#0" expanded="true" />
                 <element signature="e#415#437#0" expanded="true" />
-                <element signature="e#543#563#0" expanded="true" />
-                <element signature="e#626#644#0" expanded="true" />
-                <element signature="e#665#703#0" expanded="true" />
-                <element signature="e#764#783#0" expanded="true" />
+                <element signature="e#514#552#0" expanded="true" />
+                <element signature="e#612#631#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -380,9 +364,9 @@
         <option value="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/config/services.xml" />
         <option value="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Entity/Fridge.php" />
         <option value="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Form/FridgeItemType.php" />
-        <option value="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Controller/FridgeController.php" />
-        <option value="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/views/Fridge/fridge.html.twig" />
         <option value="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Entity/Product.php" />
+        <option value="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/views/Fridge/fridge.html.twig" />
+        <option value="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Controller/FridgeController.php" />
       </list>
     </option>
   </component>
@@ -1259,9 +1243,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Form/FridgeItemType.php">
+    <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Entity/Product.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="27" selection-start="493" selection-end="493" vertical-scroll-proportion="-10.666667" vertical-offset="0" max-vertical-offset="810">
+        <state line="141" column="17" selection-start="2572" selection-end="2572" vertical-scroll-proportion="-8.481482" vertical-offset="2273" max-vertical-offset="2862">
           <folding />
         </state>
       </provider>
@@ -1273,31 +1257,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Form/FridgeItemType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="24" selection-start="514" selection-end="519" vertical-scroll-proportion="-11.333333" vertical-offset="0" max-vertical-offset="810">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/views/Fridge/fridge.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="157" selection-start="500" selection-end="500" vertical-scroll-proportion="-4.6666665" vertical-offset="0" max-vertical-offset="288">
+        <state line="10" column="14" selection-start="698" selection-end="698" vertical-scroll-proportion="-3.1578948" vertical-offset="0" max-vertical-offset="288">
           <folding>
             <element signature="e#78#135#0" expanded="true" />
             <element signature="e#181#285#0" expanded="true" />
             <element signature="e#415#437#0" expanded="true" />
-            <element signature="e#543#563#0" expanded="true" />
-            <element signature="e#626#644#0" expanded="true" />
-            <element signature="e#665#703#0" expanded="true" />
-            <element signature="e#764#783#0" expanded="true" />
+            <element signature="e#514#552#0" expanded="true" />
+            <element signature="e#612#631#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Controller/FridgeController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="17" selection-start="2210" selection-end="2210" vertical-scroll-proportion="-3.4252872" vertical-offset="476" max-vertical-offset="4446">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Entity/Product.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="141" column="17" selection-start="2572" selection-end="2572" vertical-scroll-proportion="0.38879457" vertical-offset="2273" max-vertical-offset="2862">
+        <state line="50" column="147" selection-start="1882" selection-end="1882" vertical-scroll-proportion="-0.42857143" vertical-offset="846" max-vertical-offset="4986">
           <folding />
         </state>
       </provider>
