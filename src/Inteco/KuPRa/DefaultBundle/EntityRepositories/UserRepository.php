@@ -3,6 +3,7 @@
 namespace Inteco\KuPRa\DefaultBundle\EntityRepositories;
 
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * UserRepository
@@ -12,4 +13,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
+
+    /**
+     * @return string
+     */
+    public function getUserName()
+    {
+        $session = new Session();
+        $user = $this->findOneById($user = $session->get('user'));
+        return $user->getName() . ' ' . $user->getSurname();
+    }
 }

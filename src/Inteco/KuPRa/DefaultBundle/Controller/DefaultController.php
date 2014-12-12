@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\Authentication\Token;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="_default")
+     * @Route("/check", name="_default")
      * @Template()
      */
     public function indexAction()
@@ -24,14 +24,14 @@ class DefaultController extends Controller
         $session = $this->get('session');
         $user = $session->get('user');
 
-        if($user == NULL){
+        if($user === NULL){
             return $this->redirect($this->generateUrl('_title'));
         }
-        return [];
+        return $this->redirect($this->generateUrl('_fridge'));
     }
 
     /**
-     * @Route("/title", name="_title")
+     * @Route("/", name="_title")
      * @Template("IntecoKuPRaDefaultBundle:Default:title.html.twig")
      */
     public function titlePageAction()
@@ -39,7 +39,7 @@ class DefaultController extends Controller
         $session = $this->get('session');
         $user = $session->get('user');
 
-        if($user != NULL){
+        if($user !== NULL){
             return $this->redirect($this->generateUrl('_title'));
         }
 

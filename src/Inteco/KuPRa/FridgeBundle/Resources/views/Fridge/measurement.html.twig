@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+    <div id="formHolder" style="display: inline-block;padding: 20px;width: 360px;">
+        {{ form(form) }}
+    </div>
+    <ul style="overflow-y:scroll;height: 236px;position: absolute;display: inline-block;left:380px;width: 480px" class="list-group">
+        {% for entity in entities %}
+        <li class="list-group-item">{{ entity.title }}<span style="font-size: 80%"> ({{ entity.shortTitle }})</span></li>
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}

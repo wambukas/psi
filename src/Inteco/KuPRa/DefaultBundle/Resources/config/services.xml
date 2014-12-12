@@ -16,6 +16,17 @@
         <service id="manager.user" class="Inteco\KuPRa\DefaultBundle\Manager\UserManager" >
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
+        <!--Meniukai-->
+        <service id="inteco.menu.builder" class="Inteco\KuPRa\DefaultBundle\Menu\MenuBuilder">
+            <argument type="service" id="knp_menu.factory"/>
+        </service>
+
+        <service id="main.menu"
+                 class="Knp\Menu\MenuItem"
+                 factory-service="inteco.menu.builder" factory-method="createMainMenu"
+                 scope="request">
+            <tag name="knp_menu.menu" alias="main.menu" />
+        </service>
     </services>
 
 </container>

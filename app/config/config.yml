@@ -28,6 +28,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+            userRepository: "@repository.user"
     form:
             resources:
                 - BraincraftedBootstrapBundle:Form:bootstrap.html.twig
