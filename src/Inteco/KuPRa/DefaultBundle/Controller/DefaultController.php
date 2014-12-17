@@ -3,13 +3,18 @@
 namespace Inteco\KuPRa\DefaultBundle\Controller;
 
 use Inteco\KuPRa\DefaultBundle\Entity\User;
+use Inteco\KuPRa\DefaultBundle\Form\Filter\Model\ImageModel;
 use Inteco\KuPRa\DefaultBundle\Form\Filter\Model\LoginModel;
+use Inteco\KuPRa\DefaultBundle\Form\Filter\Type\ImageType;
 use Inteco\KuPRa\DefaultBundle\Form\Filter\Type\LoginType;
 use Inteco\KuPRa\DefaultBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager;
@@ -125,18 +130,24 @@ class DefaultController extends Controller
         $user = $session->get('user');
 
         $user = $this->get('repository.user')->findOneById($user);
-
+        $imageForm = $this->createForm(new ImageType());
         $form = $this->createForm(new UserType(), $user)
-            ->remove('address')
+            ->remove('address', null, ['label' => 'Adresas'])
             ->remove('description')
             ->remove('submit')
-            ->add('address')
-            ->add('description', 'text')
-            ->add('image')
+            ->add('address', null, ['label' => 'Adresas'])
+            ->add('description', 'text', ['label' => 'Aprašymas'])
             ->add('Pakeisti', 'submit');
-
+        if ($this->getRequest()->isMethod('POST')) {
+            $imageForm->submit($this->getRequest());
+            $user->setImageFile($imageForm->getData()->getImage());
+            $user->upload();
+            $this->get('manager.user')->update($user);
+        }
         return [
-            'form' => $form->createView()
+            'user' => $user,
+            'form' => $form->createView(),
+            'imageForm' => $imageForm->createView()
         ];
     }
 
@@ -178,9 +189,21 @@ class DefaultController extends Controller
     {
         $session = $this->get('session');
         $user = $this->get('repository.user')->findOneById($session->get('user'));
-        $form = $this->createForm(new UserType(), $user);
+        $form = $this->createForm(new UserType(), new User())
+            ->remove('address')
+            ->remove('description')
+            ->remove('submit')
+            ->add('address')
+            ->add('description', 'text')
+            ->add('Pakeisti', 'submit');
+
         $form->submit($this->getRequest());
         if($form->isValid()){
+            $data = $form->getData();
+            $user->setName($data->getName());
+            $user->setSurname($data->getSurname());
+            $user->setAddress($data->getAddress());
+            $user->setDescription($data->getDescription());
             $this->get('manager.user')->update($user);
             $response = new Response(
                 'OK',
@@ -195,5 +218,26 @@ class DefaultController extends Controller
             );
         }
         return $response;
+    }
+
+    /**
+     * @Route("/change/image", name="_change_image")
+     */
+    public function changeImageAction()
+    {
+        $imageForm = $this->createForm(new FileType())->add('submit', 'submit');
+        $imageForm->submit($this->getRequest());
+        dd($imageForm->getData());
+    }
+
+    /**
+     * @Route("/photo", name="_user_photo")
+     * @Template("IntecoKuPRaDefaultBundle:Default:image.html.twig")
+     */
+    public function getUserPhoto()
+    {
+        $session = $this->get('session');
+        $user = $this->get('repository.user')->findOneById($session->get('user'));
+        return [ 'path' => $user->getPath() ];
     }
 }

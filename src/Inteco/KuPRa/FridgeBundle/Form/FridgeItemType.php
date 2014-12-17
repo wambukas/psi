@@ -15,8 +15,8 @@ class FridgeItemType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount')
-            ->add('product')
+            ->add('amount', null, ['label' => 'Kiekis'])
+            ->add('product', null, ['label' => 'Produktas'])
             ->add('Įdėti', 'submit')
         ;
     }

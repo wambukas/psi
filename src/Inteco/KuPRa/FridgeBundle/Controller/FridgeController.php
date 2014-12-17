@@ -183,6 +183,7 @@ class FridgeController extends Controller
             $checkTitle = $em->getRepository('IntecoKuPRaFridgeBundle:Product')->findOneBy(array('title'=>$product->getTitle()));
             if ($form->isValid()) {
                 if(empty($checkTitle)){
+                    $product->upload();
                     $em->persist($product);
                     $em->flush();
                 } else {
@@ -191,7 +192,7 @@ class FridgeController extends Controller
             }
         }
         $entities = $em->getRepository('IntecoKuPRaFridgeBundle:Product')->findAll();
-        return ['form' => $form->createView(), 'entities' => $entities, 'err' => $err, 'role' => $role];
+        return ['form' => $form->createView(), 'entities' => $entities, 'err' => $err, 'role' => $role, 'action' => 'index'];
     }
 
     /**
@@ -233,10 +234,21 @@ class FridgeController extends Controller
     }
 
     /**
-     * @Route("/recipe", name="_recipe")
+     * @Route("/recipes", name="_recipes")
+     * @Template("IntecoKuPRaFridgeBundle:Fridge:recipes.html.twig")
+     */
+    public function recipesAction()
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $entities = $em->getRepository('IntecoKuPRaFridgeBundle:Recipe')->findAll();
+        return ['entities' => $entities];
+    }
+
+    /**
+     * @Route("/recipe", name="_create_recipe")
      * @Template("IntecoKuPRaFridgeBundle:Fridge:recipe.html.twig")
      */
-    public function recipeAction()
+    public function createRecipeAction()
     {
         return [];
     }

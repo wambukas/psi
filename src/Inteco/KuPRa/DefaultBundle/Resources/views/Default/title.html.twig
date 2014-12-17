@@ -9,7 +9,7 @@
             {{ form_row(regForm.loginName) }}
             {{ form_row(regForm.password) }}
                 {{ form_row(regForm._token) }}
-                <button id="login" class="btn btn-primary">Back</button>
+                <button id="login" class="btn btn-primary">Atgal</button>
             {{ form_row(regForm.submit) }}
             </form>
         </div>
@@ -18,7 +18,7 @@
                 {{ form_row(logForm.loginName) }}
                 {{ form_row(logForm.password) }}
                 {{ form_row(logForm._token) }}
-                <button id="register" class="btn btn-primary">Register</button>
+                <button id="register" class="btn btn-primary">Registruotis</button>
                 {{ form_row(logForm.login) }}
             </form>
         </div>
@@ -35,6 +35,7 @@
                 $('#loginBox').show();
                 $('#registerBox').hide();
             });
-
+            alert('Neteisingi duomenys!');
     </script>
+
 {% endblock %}

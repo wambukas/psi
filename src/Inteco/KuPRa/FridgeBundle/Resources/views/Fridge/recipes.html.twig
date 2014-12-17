@@ -1,0 +1,10 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+    <strong style="font-size: 30px">Receptu sarasas</strong><br/>
+    <a href="{{ url('_create_recipe') }}">Kurti</a>
+    <ul style="overflow-y:scroll;height: 236px;" class="list-group">
+        {% for entity in entities %}
+            <li class="list-group-item" style="height: 75px">{{ entity.title }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

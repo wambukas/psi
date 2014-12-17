@@ -19,7 +19,6 @@ class MenuBuilder
 
     /**
      * @param FactoryInterface $factory
-     * @param ObjectManager $entityManager
      */
     public function __construct(
         FactoryInterface $factory
@@ -36,23 +35,23 @@ class MenuBuilder
         $menu = $this->factory->createItem('root');
         $menu->setChildrenAttribute('class', 'main_menu');
 
-        $menu->addChild('Fridge', array(
+        $menu->addChild('Šaldytuvas', array(
             'route' => '_fridge',
         ));
 
-        $menu->addChild('Measurements', array(
+        $menu->addChild('Matavimo vienetai', array(
             'route' => '_measurement',
         ));
 
-        $menu->addChild('Products', array(
+        $menu->addChild('Produktai', array(
             'route' => '_products',
         ));
 
-        $menu->addChild('Recipes', array(
-            'route' => '_recipe',
+        $menu->addChild('Receptai', array(
+            'route' => '_recipes',
         ));
 
-        $menu->addChild('Menus', array(
+        $menu->addChild('Tvarkaraštis', array(
             'route' => '_menu',
         ));
 

@@ -21,6 +21,9 @@ class AppKernel extends Kernel
             new Inteco\KuPRa\FridgeBundle\IntecoKuPRaFridgeBundle(),
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new \Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

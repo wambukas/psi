@@ -20,9 +20,9 @@ class LoginType extends AbstractType
     {
         $builder
 /*            ->add('loginForm','hidden', array('data' => 1))*/
-            ->add('loginName', 'text')
-            ->add('password', 'password')
-            ->add('login', 'submit');
+            ->add('loginName', 'text', ['label' => 'Prisijungimo vardas'])
+            ->add('password', 'password', ['label' => 'Slaptažodis'])
+            ->add('login', 'submit',['label' => 'Prisijungti']);
 
         return $builder;
     }

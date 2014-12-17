@@ -5,7 +5,7 @@
     </div>
     <ul style="overflow-y:scroll;height: 236px;position: absolute;display: inline-block;left:380px;width: 480px" class="list-group">
         {% for entity in entities %}
-            <li class="list-group-item">{{ entity.product.title }}<span style="font-size: 80%"> ({{ entity.amount }} {{ entity.product.measurement.shortTitle }})</span><a style="float:right;padding:0 10px 0 0" href="{{ url('_edit_fridge', {'id' : entity.id}) }}"><span style="color:blue;">Edit</span></a></li>
+            <li class="list-group-item">{{ entity.product.title }}<span style="font-size: 80%"> ({{ entity.amount }} {{ entity.product.measurement.shortTitle }})</span><a style="float:right;padding:0 10px 0 0" href="{{ url('_edit_fridge', {'id' : entity.id}) }}"><span style="color:blue;">Redaguoti</span></a></li>
         {% endfor %}
     </ul>
 {% endblock %}

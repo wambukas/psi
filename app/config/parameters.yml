@@ -15,3 +15,6 @@ parameters:
     debug_toolbar: true
     debug_redirects: false
     use_assetic_controller: true
+    inteco_image_tmp_dir: uploads/tmp
+    inteco_image_dir: uploads/photos
+    inteco_images_per_dir: 10000

@@ -40,14 +40,14 @@ class Product
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     private $description;
 
     /**
-     * @Assert\File(maxSize="6000000")
+     * @ORM\OneToMany(targetEntity="Inteco\KuPRa\DefaultBundle\Entity\UserImage", mappedBy="image", cascade={"all"})
      */
-    private $image;
+    protected $images;
 
     /**
      * Get id
@@ -128,23 +128,48 @@ class Product
         return $this->measurement;
     }
 
-    /**
-     * Sets image.
-     *
-     * @param UploadedFile $image
-     */
-    public function setImage(UploadedFile $image = null)
+    public function __toString()
     {
-        $this->image = $image;
+        return $this->title . ' (' . $this->measurement->getTitle() .') ';
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * Get image.
+     * Add images
      *
-     * @return UploadedFile
+     * @param \Inteco\KuPRa\DefaultBundle\Entity\UserImage $images
+     * @return Product
      */
-    public function getImage()
+    public function addImage(\Inteco\KuPRa\DefaultBundle\Entity\UserImage $images)
     {
-        return $this->image;
+        $this->images[] = $images;
+
+        return $this;
+    }
+
+    /**
+     * Remove images
+     *
+     * @param \Inteco\KuPRa\DefaultBundle\Entity\UserImage $images
+     */
+    public function removeImage(\Inteco\KuPRa\DefaultBundle\Entity\UserImage $images)
+    {
+        $this->images->removeElement($images);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getImages()
+    {
+        return $this->images;
     }
 }

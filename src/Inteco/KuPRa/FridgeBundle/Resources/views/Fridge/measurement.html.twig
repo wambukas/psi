@@ -5,7 +5,7 @@
     </div>
     <ul style="overflow-y:scroll;height: 236px;position: absolute;display: inline-block;left:380px;width: 480px" class="list-group">
         {% for entity in entities %}
-        <li class="list-group-item">{{ entity.title }}<span style="font-size: 80%"> ({{ entity.shortTitle }})</span>{% if role == 'ROLE_ADMIN' %}<a style="float:right;" href="{{ url('_delete_measurement', {'id' : entity.id}) }}"><span style="color:red;">Delete</span></a><a style="float:right;padding:0 10px 0 0" href="{{ url('_edit_measurement', {'id' : entity.id}) }}"><span style="color:blue;">Edit</span></a>{% endif %}</li>
+        <li class="list-group-item">{{ entity.title }}<span style="font-size: 80%"> ({{ entity.shortTitle }})</span>{% if role == 'ROLE_ADMIN' %}<a style="float:right;" href="{{ url('_delete_measurement', {'id' : entity.id}) }}"><span style="color:red;">Ištrinti</span></a><a style="float:right;padding:0 10px 0 0" href="{{ url('_edit_measurement', {'id' : entity.id}) }}"><span style="color:blue;">Redaguoti</span></a>{% endif %}</li>
         {% endfor %}
     </ul>
 {% endblock %}

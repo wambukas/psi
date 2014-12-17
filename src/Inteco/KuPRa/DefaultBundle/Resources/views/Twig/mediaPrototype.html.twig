@@ -1,0 +1,26 @@
+<tr class="template-upload fade in">
+    <td>
+        <span class="preview">
+            {% if  imageFormType.image.path.vars.value %}
+                <img src="{{ imageFormType.image.vars.data|imagePath('thumbnail_80x45') }}" />
+            {% endif %}
+        </span>
+    </td>
+    <td>
+        <p class="name">
+            {% if  imageFormType.image.originalName.vars.value %}
+                {{ imageFormType.image.originalName.vars.value }}
+            {% endif %}
+        </p>
+        <strong class="error text-danger"></strong>
+    </td>
+    <td>
+        <button data-event="removeCollectionItem" type="button" class="btn btn-danger delete">
+            <i data-event="removeCollectionItem" class="glyphicon glyphicon-trash"></i>
+            <span data-event="removeCollectionItem">Delete</span>
+        </button>
+    </td>
+    {{ form_widget(imageFormType.image.originalName) }}
+    {{ form_widget(imageFormType.image.originalPath) }}
+    {{ form_widget(imageFormType.image.path) }}
+</tr>

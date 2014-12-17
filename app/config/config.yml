@@ -34,6 +34,13 @@ twig:
             resources:
                 - BraincraftedBootstrapBundle:Form:bootstrap.html.twig
 
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+            product_image:
+                uri_prefix:         /images/products
+                upload_destination: %kernel.root_dir%/../web/images/products
 
 braincrafted_bootstrap:
     less_filter: lessphp
@@ -44,8 +51,8 @@ braincrafted_bootstrap:
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
-    use_controller: false
-    bundles:        [ ]
+    use_controller: true
+    bundles:        [ IntecoKuPRaFridgeBundle, IntecoKuPRaDefaultBundle ]
     #java: /usr/bin/java
     filters:
         lessphp:

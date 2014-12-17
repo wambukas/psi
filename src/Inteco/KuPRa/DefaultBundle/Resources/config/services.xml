@@ -16,6 +16,16 @@
         <service id="manager.user" class="Inteco\KuPRa\DefaultBundle\Manager\UserManager" >
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
+
+        <service id="manager.common.image" class="Inteco\KuPRa\DefaultBundle\Manager\ImageManager">
+            <argument type="service" id="validator"/>
+            <argument>%inteco_image_tmp_dir%</argument>
+            <argument>%inteco_image_dir%</argument>
+            <argument type="service" id="translator"/>
+            <argument type="service" id="imagine.cache.path.resolver"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+
         <!--Meniukai-->
         <service id="inteco.menu.builder" class="Inteco\KuPRa\DefaultBundle\Menu\MenuBuilder">
             <argument type="service" id="knp_menu.factory"/>
@@ -26,6 +36,12 @@
                  factory-service="inteco.menu.builder" factory-method="createMainMenu"
                  scope="request">
             <tag name="knp_menu.menu" alias="main.menu" />
+        </service>
+
+        <service id="inteco.twig.velniai_extension" class="Inteco\KuPRa\DefaultBundle\Twig\IntecoExtension">
+            <tag name="twig.extension"/>
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="manager.common.image"/>
         </service>
     </services>
 

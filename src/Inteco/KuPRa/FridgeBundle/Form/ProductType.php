@@ -2,7 +2,10 @@
 
 namespace Inteco\KuPRa\FridgeBundle\Form;
 
+use Inteco\KuPRa\DefaultBundle\Form\ImageProductType;
+use Inteco\KuPRa\DefaultBundle\Form\ImageType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -15,10 +18,10 @@ class ProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('description')
-            ->add('measurement')
-            ->add('image')
+            ->add('title', null, ['label' => 'Pavadinimas'])
+            ->add('description', null, ['label' => 'Aprašymas'])
+            ->add('measurement', null, ['label' => 'Matavimo vienetai'])
+            ->add('imageFile', 'file', ['data_class' => 'Symfony\Component\HttpFoundation\File\File', 'label'=>'Nuotrauka'])
             ->add('Sukurti', 'submit');
         ;
     }

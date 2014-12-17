@@ -15,9 +15,9 @@ class MeasurementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('shortTitle')
-            ->add('submit','submit')
+            ->add('title', null, ['label' => 'Pavadinimas'])
+            ->add('shortTitle', null, ['label' => 'Trumpinimas'])
+            ->add('Sukurti','submit')
         ;
     }
     

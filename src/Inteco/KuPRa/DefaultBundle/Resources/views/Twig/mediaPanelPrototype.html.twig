@@ -1,0 +1,44 @@
+{#<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a class="collapsed" href="#mediaTab" data-parent="#collapseable" data-toggle="collapse">
+                <i class="fa fa-clipboard"></i>
+                {{ '_admin_banner_element_tab_media'|trans }}
+            </a>
+        </h4>
+    </div>
+    <div style="height: 0px;" class="panel-collapse collapse" id="mediaTab">
+        <div class="panel-body">#}
+            <p class="lead">{{ '_admin_banner_element_tab_media'|trans }}</p>
+
+            <div class="row fileupload-buttonbar">
+                <div class="col-lg-7">
+                    <div class="btn-group">
+                        <span class="btn btn-success btn-rounded fileinput-button">
+                            <i class="glyphicon glyphicon-plus"></i>
+                            <span>{{ 'file_browse_button'|trans }}</span>
+                            <input data-bind="photosUpload" data-url="{{ path('_admin_image_upload', {'filters': 'thumbnail_80x45'}) }}" type="file" multiple="" name="files[]">
+                        </span>
+                    </div>
+                    <span class="fileupload-process"></span>
+                </div>
+                <div id="progress-bar" class="col-lg-5 fileupload-progress fade">
+                    <div aria-valuemax="100" aria-valuemin="0" role="progressbar" class="progress progress-striped active" aria-valuenow="0">
+                        <div style="width: 0%;" class="progress-bar progress-bar-success"></div>
+                    </div>
+                    <div class="progress-extended">&nbsp;</div>
+                </div>
+            </div>
+            <br />
+            <table id="media-photos" class="table table-striped" role="presentation"
+                   data-prototype="{{ photoPrototype(mediaImages.vars.prototype)|e }}">
+                <tbody class="files">
+                {% for image in mediaImages %}
+                    {{ photoPrototype(image)|raw }}
+                {% endfor %}
+                </tbody>
+            </table>
+{#
+        </div>
+    </div>
+</div>#}
