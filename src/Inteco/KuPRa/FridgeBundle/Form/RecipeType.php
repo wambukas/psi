@@ -15,11 +15,12 @@ class RecipeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('portion')
-            ->add('preparation')
-            ->add('description')
-            ->add('file', 'file', ['multiple' => true, 'data_class' => 'Symfony\Component\HttpFoundation\File\File', 'label' => 'Nuotrauka'])
+            ->add('id', 'hidden')
+            ->add('title', null, ['label' =>'Pavadinimas'])
+            ->add('portion', null, ['label' =>'Porcijų skaičius'])
+            ->add('preparation', null, ['label' =>'Paruošimo trukme (min.)'])
+            ->add('description', null, ['label' =>'Aprašymas'])
+            ->add('file', 'file', ['multiple' => true, 'data_class' => 'Symfony\Component\HttpFoundation\File\File', 'label' => 'Nuotrauka/os'])
             ->add('Išsaugoti', 'submit')
         ;
     }

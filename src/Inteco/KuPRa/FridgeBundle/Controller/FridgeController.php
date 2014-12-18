@@ -255,19 +255,36 @@ class FridgeController extends Controller
      */
     public function createRecipeAction()
     {
-        $recipe = new Recipe();
-        $fs = new Filesystem();
-        $form = $this->createForm(new RecipeType(), $recipe);
         $em = $this->getDoctrine()->getEntityManager();
         if ($this->getRequest()->isMethod('POST')) {
+            $recipe = $em->getRepository('IntecoKuPRaFridgeBundle:Recipe')->findOneById($this->getRequest()->request->get('inteco_kupra_fridgebundle_recipe')['id']);
+        } else {
+            $recipe = new Recipe();
+        }
+        $fs = new Filesystem();
+
+        $session = $this->get('session');
+        $userId = $session->get('user');
+        $userRepository = $this->get('repository.user');
+        $user = $userRepository->findOneBy(['id' => $userId]);
+        $recipe->setAuthor($user);
+        $em->persist($recipe);
+        $em->flush();
+        $form = $this->createForm(new RecipeType(), $recipe);
+        if ($this->getRequest()->isMethod('POST')) {
             $form->submit($this->getRequest());
-            $session = $this->get('session');
-            $userId = $session->get('user');
-            $userRepository = $this->get('repository.user');
-            $user = $userRepository->findOneBy(['id' => $userId]);
-            $recipe->setAuthor($user);
+            $data = $this->getRequest()->request->get('inteco_kupra_fridgebundle_recipeitem_product');
+            if(!empty($data)){
+                foreach($data as $item){
+                    $product = $em->getRepository('IntecoKuPRaFridgeBundle:RecipeItem')->findOneById($item['id']);
+                    $product->setProduct($em->getRepository('IntecoKuPRaFridgeBundle:Product')->findOneById($item['product']));
+                    $product->setAmount($item['amount']);
+                    $em->persist($product);
+                    $em->flush();
+                }
             $images = $recipe->getFile();
             $recipe->setPaths([]);
+            $recipe->setAuthor($user);
             foreach($images as $image){
                 if(!$fs->exists('/home/wambo/Projects/psi/src/Inteco/KuPRa/FridgeBundle/Resources/public/images'.$image->getClientOriginalName())){
                     $image->move(
@@ -280,9 +297,9 @@ class FridgeController extends Controller
             $em->persist($recipe);
             $em->flush();
             return $this->redirect($this->generateUrl('_recipes'));
+            }
         }
-        $em->persist($recipe);
-        $em->flush();
+
         return ['form' => $form->createView(), 'id' => $recipe->getId()];
     }
 

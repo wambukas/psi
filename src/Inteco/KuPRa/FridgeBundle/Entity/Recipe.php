@@ -64,6 +64,11 @@ class Recipe
     protected $image;
 
     /**
+     * @ORM\OneToMany(targetEntity="RecipeItem", mappedBy="recipe")
+     */
+    private $products;
+
+    /**
      * @var array
      *
      * @ORM\Column(name="Paths", type="array")
@@ -246,5 +251,44 @@ class Recipe
     public function setFile(array $image = null)
     {
         $this->image = $image;
+    }
+
+    /**
+     * Add products
+     *
+     * @param \Inteco\KuPRa\FridgeBundle\Entity\RecipeItem $products
+     * @return Recipe
+     */
+    public function addProduct(\Inteco\KuPRa\FridgeBundle\Entity\RecipeItem $products)
+    {
+        $this->products[] = $products;
+
+        return $this;
+    }
+
+    /**
+     * Remove products
+     *
+     * @param \Inteco\KuPRa\FridgeBundle\Entity\RecipeItem $products
+     */
+    public function removeProduct(\Inteco\KuPRa\FridgeBundle\Entity\RecipeItem $products)
+    {
+        $this->products->removeElement($products);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
     }
 }
