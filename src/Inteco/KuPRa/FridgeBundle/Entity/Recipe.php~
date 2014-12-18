@@ -3,6 +3,7 @@
 namespace Inteco\KuPRa\FridgeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Recipe
@@ -43,7 +44,7 @@ class Recipe
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="Preparation", type="time")
+     * @ORM\Column(name="Preparation", type="integer")
      */
     private $preparation;
 
@@ -54,6 +55,19 @@ class Recipe
      */
     private $description;
 
+    /**
+     * @Vich\UploadableField(mapping="recipe_image")
+     *
+     * @var File $image
+     */
+    protected $image;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="Paths", type="array")
+     */
+    private $paths;
 
     /**
      * Get id
@@ -114,7 +128,7 @@ class Recipe
     /**
      * Set preparation
      *
-     * @param \DateTime $preparation
+     * @param Integer $preparation
      * @return Recipe
      */
     public function setPreparation($preparation)
@@ -127,7 +141,7 @@ class Recipe
     /**
      * Get preparation
      *
-     * @return \DateTime 
+     * @return Integer
      */
     public function getPreparation()
     {
@@ -158,4 +172,65 @@ class Recipe
     }
 
 
+
+    /**
+     * Set author
+     *
+     * @param \Inteco\KuPRa\DefaultBundle\Entity\User $author
+     * @return Recipe
+     */
+    public function setAuthor(\Inteco\KuPRa\DefaultBundle\Entity\User $author = null)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return \Inteco\KuPRa\DefaultBundle\Entity\User 
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    public function __construct()
+    {
+        $this->paths = [];
+    }
+
+    /**
+     * Set paths
+     *
+     * @param array $paths
+     * @return Recipe
+     */
+    public function setPaths($paths)
+    {
+        $this->paths = $paths;
+
+        return $this;
+    }
+
+    /**
+     * Get paths
+     *
+     * @return array 
+     */
+    public function getPaths()
+    {
+        return $this->paths;
+    }
+
+    /**
+     * @param string $path
+     * @return Recipe
+     */
+    public function addPaths($path)
+    {
+        $this->paths[] = $path;
+        return $this->paths;
+    }
 }

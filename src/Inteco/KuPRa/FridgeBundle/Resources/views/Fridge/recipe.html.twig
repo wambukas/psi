@@ -1,5 +1,29 @@
 {% extends 'layout.html.twig' %}
 {% block content %}
-    <strong style="font-size: 30px">Receptas</strong>
-    <a src="{{ url('_create_recipe') }}">Kurti</a>
+    <strong style="font-size: 30px">Receptas</strong><br/>
+    <div id="formHolder" style="display: inline-block;padding: 20px;width: 360px;">
+    {{ form(form) }}
+    </div>
+    <div id="formHolder2" style="display: inline-block;position: absolute;padding: 0 20px 20px 20px;width: 360px;">
+
+        <ul id="itemsHere" style="overflow-y:scroll;height: 360px;" class="list-group">
+            </ul>
+        <button id="add" class="btn btn-primary">add</button>
+    </div>
+    <script type="text/javascript">
+        $("#add").on('click', function(event){
+            event.preventDefault();
+            $.post('{{ url('_add_recipe_items', {'id' : id}) }}', null, function (result) {
+                $('#itemsHere').append(result);
+            })
+        });
+
+
+        {#     $(document).on('load', function(){
+            event.preventDefault();
+            $.post('{{ url('_recipe_items', {'id' : id}) }}', null, function (result) {
+                $('#itemsHere').append(result);
+            })
+        });#}
+    </script>
 {% endblock %}

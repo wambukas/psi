@@ -8,9 +8,14 @@ use Inteco\KuPRa\FridgeBundle\Entity\FridgeItem;
 use Inteco\KuPRa\FridgeBundle\Entity\FridgeRepository;
 use Inteco\KuPRa\FridgeBundle\Entity\Measurement;
 use Inteco\KuPRa\FridgeBundle\Entity\Product;
+use Inteco\KuPRa\FridgeBundle\Entity\Recipe;
+use Inteco\KuPRa\FridgeBundle\Entity\RecipeItem;
 use Inteco\KuPRa\FridgeBundle\Form\FridgeItemType;
 use Inteco\KuPRa\FridgeBundle\Form\MeasurementType;
 use Inteco\KuPRa\FridgeBundle\Form\ProductType;
+use Inteco\KuPRa\FridgeBundle\Form\RecipeItemType;
+use Inteco\KuPRa\FridgeBundle\Form\RecipeType;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -250,7 +255,70 @@ class FridgeController extends Controller
      */
     public function createRecipeAction()
     {
-        return [];
+        $recipe = new Recipe();
+        $fs = new Filesystem();
+        $form = $this->createForm(new RecipeType(), $recipe);
+        $em = $this->getDoctrine()->getEntityManager();
+        if ($this->getRequest()->isMethod('POST')) {
+            $form->submit($this->getRequest());
+            $session = $this->get('session');
+            $userId = $session->get('user');
+            $userRepository = $this->get('repository.user');
+            $user = $userRepository->findOneBy(['id' => $userId]);
+            $recipe->setAuthor($user);
+            $images = $recipe->getFile();
+            $recipe->setPaths([]);
+            foreach($images as $image){
+                if(!$fs->exists('/home/wambo/Projects/psi/src/Inteco/KuPRa/FridgeBundle/Resources/public/images'.$image->getClientOriginalName())){
+                    $image->move(
+                        '/home/wambo/Projects/psi/src/Inteco/KuPRa/FridgeBundle/Resources/public/images',
+                        $image->getClientOriginalName()
+                    );
+                }
+                $recipe->addPaths('bundles/intecokuprafridge/images/'.$image->getClientOriginalName());
+            }
+            $em->persist($recipe);
+            $em->flush();
+            return $this->redirect($this->generateUrl('_recipes'));
+        }
+        $em->persist($recipe);
+        $em->flush();
+        return ['form' => $form->createView(), 'id' => $recipe->getId()];
+    }
+
+    /**
+     * @Route("/recipe/items/{id}", name="_recipe_items")
+     * @Template("IntecoKuPRaFridgeBundle:Fridge:recipeItems.html.twig")
+     */
+    public function getRecipeItemsAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $recipe = $em->getRepository('IntecoKuPRaFridgeBundle:Recipe')->findOneById($id);
+        $items = $em->getRepository('IntecoKuPRaFridgeBundle:RecipeItem')->findBy(['recipe' => $recipe]);
+        $forms = [];
+        foreach($items as $item){
+            $form = $this->createForm(new RecipeItemType(), $item);
+            $forms[] = $form->createView();
+        }
+
+        return ['forms' => $forms];
+    }
+
+    /**
+     * @Route("/recipe/add/{id}", name="_add_recipe_items")
+     * @Template("IntecoKuPRaFridgeBundle:Fridge:recipeAdd.html.twig")
+     */
+    public function addRecipeItemAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $recipe = $em->getRepository('IntecoKuPRaFridgeBundle:Recipe')->findOneById($id);
+        $item = new RecipeItem();
+        $item->setRecipe($recipe);
+        $em->persist($item);
+        $em->flush();
+        $form = $this->createForm(new RecipeItemType(), $item);
+
+        return ['form' => $form->createView()];
     }
 
     /**

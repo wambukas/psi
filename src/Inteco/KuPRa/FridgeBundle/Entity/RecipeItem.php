@@ -24,7 +24,7 @@ class RecipeItem
     /**
      * @var integer
      *
-     * @ORM\Column(name="Amount", type="integer")
+     * @ORM\Column(name="Amount", type="integer", nullable=true)
      */
     private $amount;
 
