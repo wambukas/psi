@@ -20,7 +20,8 @@ class RecipeType extends AbstractType
             ->add('portion', null, ['label' =>'Porcijų skaičius'])
             ->add('preparation', null, ['label' =>'Paruošimo trukme (min.)'])
             ->add('description', null, ['label' =>'Aprašymas'])
-            ->add('file', 'file', ['multiple' => true, 'data_class' => 'Symfony\Component\HttpFoundation\File\File', 'label' => 'Nuotrauka/os'])
+            ->add('private', null, ['label' =>'Viešas'])
+            ->add('file', 'file', ['required' => false, 'multiple' => true, 'data_class' => 'Symfony\Component\HttpFoundation\File\File', 'label' => 'Nuotrauka/os'])
             ->add('Išsaugoti', 'submit')
         ;
     }

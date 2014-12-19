@@ -7,12 +7,15 @@ use Inteco\KuPRa\DefaultBundle\EntityRepositories\UserRepository;
 use Inteco\KuPRa\FridgeBundle\Entity\FridgeItem;
 use Inteco\KuPRa\FridgeBundle\Entity\FridgeRepository;
 use Inteco\KuPRa\FridgeBundle\Entity\Measurement;
+use Inteco\KuPRa\FridgeBundle\Entity\Menu;
+use Inteco\KuPRa\FridgeBundle\Entity\MenuItem;
 use Inteco\KuPRa\FridgeBundle\Entity\Product;
 use Inteco\KuPRa\FridgeBundle\Entity\Recipe;
 use Inteco\KuPRa\FridgeBundle\Entity\RecipeItem;
 use Inteco\KuPRa\FridgeBundle\Entity\Star;
 use Inteco\KuPRa\FridgeBundle\Form\FridgeItemType;
 use Inteco\KuPRa\FridgeBundle\Form\MeasurementType;
+use Inteco\KuPRa\FridgeBundle\Form\MenuItemType;
 use Inteco\KuPRa\FridgeBundle\Form\ProductType;
 use Inteco\KuPRa\FridgeBundle\Form\RecipeItemType;
 use Inteco\KuPRa\FridgeBundle\Form\RecipeType;
@@ -241,18 +244,50 @@ class FridgeController extends Controller
     }
 
     /**
+     * @Route("/recipe/menu/{id}", name="_create_menu")
+     * @Template("IntecoKuPRaFridgeBundle:Fridge:createMenu.html.twig")
+     */
+    public function createMenuAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $recipe = $em->getRepository('IntecoKuPRaFridgeBundle:Recipe')->findOneById($id);
+        $menuItem = new MenuItem();
+        $menuItem->setRecipe($recipe);
+        $menu = $this->_getMenu();
+        $menuItem->setMenu($menu);
+        $form = $this->createForm(new MenuItemType(), $menuItem);
+        if ($this->getRequest()->isMethod('POST')) {
+            $form->submit($this->getRequest());
+            $em->persist($menuItem);
+            $em->flush();
+            return $this->redirect($this->generateUrl('_view_recipe', ['id' => $id]));
+        }
+        return ['form' => $form->createView(), 'recipe' => $recipe];
+    }
+
+    /**
      * @Route("/recipes", name="_recipes")
      * @Template("IntecoKuPRaFridgeBundle:Fridge:recipes.html.twig")
      */
     public function recipesAction()
     {
         $this->_checkRecipes();
+        $role = $this->_getUserRole();
         $em = $this->getDoctrine()->getEntityManager();
-        $entities = $em->getRepository('IntecoKuPRaFridgeBundle:Recipe')->findAll();
+
         $session = $this->get('session');
         $userId = $session->get('user');
+        $entitiesUser = $em->getRepository('IntecoKuPRaFridgeBundle:Recipe')->findBy(['author' => $userId]);
+        $entitiesPriv = $em->getRepository('IntecoKuPRaFridgeBundle:Recipe')->findBy(['private' => 1]);
+        $entities = [];
+        foreach($entitiesPriv as $entity){
+            $entities[$entity->getId()] = $entity;
+        }
+        foreach($entitiesUser as $entity){
+            $entities[$entity->getId()] = $entity;
+        }
         $fridge = $em->getRepository('IntecoKuPRaFridgeBundle:Fridge')->findOneBy(['author' => $userId]);
-        return ['entities' => $entities, 'fridge' => $fridge];
+        return ['entities' => $entities, 'fridge' => $fridge, 'role' => $role];
     }
 
     /**
@@ -353,18 +388,70 @@ class FridgeController extends Controller
             $images = $recipe->getFile();
             $recipe->setPaths([]);
             $recipe->setAuthor($user);
-            foreach($images as $image){
-                if(!$fs->exists('/home/wambo/Projects/psi/src/Inteco/KuPRa/FridgeBundle/Resources/public/images'.$image->getClientOriginalName())){
-                    $image->move(
-                        '/home/wambo/Projects/psi/src/Inteco/KuPRa/FridgeBundle/Resources/public/images',
-                        $image->getClientOriginalName()
-                    );
+                if(!empty($images)){
+                    foreach($images as $image){
+                        if(!$fs->exists('/home/wambo/Projects/psi/src/Inteco/KuPRa/FridgeBundle/Resources/public/images'.$image->getClientOriginalName())){
+                            $image->move(
+                                '/home/wambo/Projects/psi/src/Inteco/KuPRa/FridgeBundle/Resources/public/images',
+                                $image->getClientOriginalName()
+                            );
+                        }
+                        $recipe->addPaths('bundles/intecokuprafridge/images/'.$image->getClientOriginalName());
+                    }
                 }
-                $recipe->addPaths('bundles/intecokuprafridge/images/'.$image->getClientOriginalName());
-            }
             $em->persist($recipe);
             $em->flush();
             return $this->redirect($this->generateUrl('_recipes'));
+            }
+        }
+
+        return ['form' => $form->createView(), 'id' => $recipe->getId()];
+    }
+
+    /**
+     * @Route("/recipe/edit/{id}", name="_edit_recipe")
+     * @Template("IntecoKuPRaFridgeBundle:Fridge:edit.html.twig")
+     */
+    public function editRecipeAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $recipe = $em->getRepository('IntecoKuPRaFridgeBundle:Recipe')->findOneById($id);
+        $fs = new Filesystem();
+
+        $session = $this->get('session');
+        $userId = $session->get('user');
+        $userRepository = $this->get('repository.user');
+        $user = $userRepository->findOneBy(['id' => $userId]);
+        $recipe->setAuthor($user);
+        $em->persist($recipe);
+        $em->flush();
+        $form = $this->createForm(new RecipeType(), $recipe);
+        if ($this->getRequest()->isMethod('POST')) {
+            $form->submit($this->getRequest());
+            $data = $this->getRequest()->request->get('inteco_kupra_fridgebundle_recipeitem_product');
+            if(!empty($data)){
+                foreach($data as $item){
+                    $product = $em->getRepository('IntecoKuPRaFridgeBundle:RecipeItem')->findOneById($item['id']);
+                    $product->setProduct($em->getRepository('IntecoKuPRaFridgeBundle:Product')->findOneById($item['product']));
+                    $product->setAmount($item['amount']);
+                    $em->persist($product);
+                    $em->flush();
+                }
+                $images = $recipe->getFile();
+                $recipe->setPaths([]);
+                $recipe->setAuthor($user);
+                foreach($images as $image){
+                    if(!$fs->exists('/home/wambo/Projects/psi/src/Inteco/KuPRa/FridgeBundle/Resources/public/images'.$image->getClientOriginalName())){
+                        $image->move(
+                            '/home/wambo/Projects/psi/src/Inteco/KuPRa/FridgeBundle/Resources/public/images',
+                            $image->getClientOriginalName()
+                        );
+                    }
+                    $recipe->addPaths('bundles/intecokuprafridge/images/'.$image->getClientOriginalName());
+                }
+                $em->persist($recipe);
+                $em->flush();
+                return $this->redirect($this->generateUrl('_recipes'));
             }
         }
 
@@ -412,7 +499,34 @@ class FridgeController extends Controller
      */
     public function menuAction()
     {
-        return [];
+        $session = $this->get('session');
+        $userId = $session->get('user');
+        $em = $this->getDoctrine()->getEntityManager();
+        $menu = $em->getRepository('IntecoKuPRaFridgeBundle:Menu')->findOneBy(['author' => $userId]);
+        $fridge = $em->getRepository('IntecoKuPRaFridgeBundle:Fridge')->findOneBy(['author' => $userId]);
+        $menuItems = $em->getRepository('IntecoKuPRaFridgeBundle:MenuItem')->findBy(['menu' => $menu]);
+
+        $needed = [];
+        foreach($menuItems as $item){
+            $products = $item->getRecipe()->getProducts();
+            foreach($products as $product){
+                if(!empty($needed[$product->getProduct()->getId()])){
+                    $needed[$product->getProduct()->getId()] = $needed[$product->getProduct()->getId()] + $product->getAmount()*$item->getPortions();
+                } else {
+                    $needed[$product->getProduct()->getId()] = $product->getAmount()*$item->getPortions();
+                }
+            }
+        }
+        foreach($needed as $key => $item){
+            $fridgeItem = $em->getRepository('IntecoKuPRaFridgeBundle:FridgeItem')->findOneBy(['fridge' => $fridge, 'product' => $key]);
+            if(!empty($fridgeItem) && ($item <= $fridgeItem->getAmount())){
+                unset($needed[$key]);
+            } elseif(!empty($fridgeItem)) {
+                $needed[$key] = $item - $fridgeItem->getAmount();
+            }
+        }
+
+        return ['menu' => $menuItems, 'needed' => $needed];
     }
 
     private function _getUserRole()
@@ -462,6 +576,28 @@ class FridgeController extends Controller
                 $em->flush();
             }
             return $fridge;
+        } else {
+            return null;
+        }
+    }
+
+    private function _getMenu()
+    {
+        $session = $this->get('session');
+        $userId = $session->get('user');
+        if($userId != NULL){
+            $userRepository = $this->get('repository.user');
+            $user = $userRepository->findOneBy(['id' => $userId]);
+            $em = $this->getDoctrine()->getEntityManager();
+            $menu = $em->getRepository('IntecoKuPRaFridgeBundle:Menu')->findOneBy(['author' => $user]);
+            if ($menu == NULL){
+                $menu = new Menu();
+                $menu->setAuthor($user);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($menu);
+                $em->flush();
+            }
+            return $menu;
         } else {
             return null;
         }

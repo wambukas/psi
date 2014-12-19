@@ -1,4 +1,23 @@
 {% extends 'layout.html.twig' %}
 {% block content %}
-    {% include 'ADesignsCalendarBundle::calendar.html.twig' %}
+  {#  {% include 'ADesignsCalendarBundle::calendar.html.twig' %}#}
+    <strong style="font-size: 36px">Tvarkaraštis</strong>
+    <ul class="list-group" style="width: 458px;">
+        {% for item in menu %}
+        <li class="list-group-item">
+            <strong>Receptas:</strong> {{ item.recipe.title }}
+            <strong>Data:</strong> {{ item.date|date('Y-m-d') }}
+            <strong>Porcijos:</strong> {{ item.portions }}
+        </li>
+        {% endfor %}
+    </ul>
+    <strong style="font-size: 36px">Trukstam</strong>
+    <ul class="list-group" style="width: 458px;">
+    {% for key, item in needed %}
+    <li class="list-group-item">
+        <strong>Produktas:</strong> {{ "a"|product_name(key) }}
+        <strong>Kiek trūksta:</strong> {{ item }}
+    </li>
+        {% endfor %}
+    </ul>
 {% endblock %}

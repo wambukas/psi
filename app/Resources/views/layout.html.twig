@@ -34,7 +34,8 @@
         </div>
         <div id="navbar" style="float:right" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="{{ url('_logout') }}">Atsijungti</a></li>
+                <li><a style="color:red" href="{{ url('_logout') }}">Atsijungti</a></li>
+                <li><a href="{{ url('_list') }}">Vartotojų sąrašas</a></li>
                 <li><a href="{{ url('_profile') }}">{{ userRepository.getUserName() }}</a></li>
             </ul>
         </div><!--/.nav-collapse -->

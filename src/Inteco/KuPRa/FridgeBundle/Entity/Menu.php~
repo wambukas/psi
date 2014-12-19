@@ -22,9 +22,14 @@ class Menu
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Recipe", mappedBy="id")
+     * @ORM\ManyToOne(targetEntity="\Inteco\KuPRa\DefaultBundle\Entity\User")
      */
-    private $recipes;
+    private $author;
+
+    /**
+     * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="menu")
+     */
+    private $menuItem;
 
     /**
      * Get id
@@ -34,5 +39,45 @@ class Menu
     public function getId()
     {
         return $this->id;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->recipes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add recipes
+     *
+     * @param \Inteco\KuPRa\FridgeBundle\Entity\Recipe $recipes
+     * @return Menu
+     */
+    public function addRecipe(\Inteco\KuPRa\FridgeBundle\Entity\Recipe $recipes)
+    {
+        $this->recipes[] = $recipes;
+
+        return $this;
+    }
+
+    /**
+     * Remove recipes
+     *
+     * @param \Inteco\KuPRa\FridgeBundle\Entity\Recipe $recipes
+     */
+    public function removeRecipe(\Inteco\KuPRa\FridgeBundle\Entity\Recipe $recipes)
+    {
+        $this->recipes->removeElement($recipes);
+    }
+
+    /**
+     * Get recipes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRecipes()
+    {
+        return $this->recipes;
     }
 }

@@ -1,9 +1,11 @@
 {% for form in forms %}
-<li id="deletethis_{{ form.vars.value.id }}" class="list-group-item">
-    {{ form_row(form.product) }}
-    {{ form_row(form.amount) }}
-    {{ form_row(form._token) }}
-    <button class="btn btn-danger removeButton" float="right" rel="{{ form.vars.value.id }}">Ištrinti</button>
+    {% set rand = random() %}
+    <li id="deletethis_{{ form.vars.value.id }}" class="list-group-item" >
+        {{ form_row(form.id, {'full_name' : 'inteco_kupra_fridgebundle_recipeitem_product['~rand~'][id]'}) }}
+        {{ form_row(form.product, {'full_name' : 'inteco_kupra_fridgebundle_recipeitem_product['~rand~'][product]'}) }}
+        {{ form_row(form.amount, {'full_name' : 'inteco_kupra_fridgebundle_recipeitem_product['~rand~'][amount]'}) }}
+        {{ form_row(form._token, {'full_name' : 'inteco_kupra_fridgebundle_recipeitem_product['~rand~'][_token]'}) }}
+        <button class="btn btn-danger removeButton" float="right" rel="{{ form.vars.value.id }}">Ištrinti</button>
     </li>
 {% endfor %}
 

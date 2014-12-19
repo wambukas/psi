@@ -6,10 +6,16 @@
         {% for entity in entities %}
 
             <li class="list-group-item" style="height: 75px"><img src="{{ asset(entity.paths.0) }}" height="55" width="55px" style="padding: 0 5px 0 0"/>
-                <a href="{{ url('_view_recipe', {'id' : entity.id}) }}"><strong>{{ entity.title }}</strong></a>
+                {% set able = "a"|recipe_search(entity.id, fridge.id) %}
+                <a href="{{ url('_view_recipe', {'id' : entity.id}) }}"><strong>{{ entity.title }}</strong></a><span style="color:{% if able %}green{% else %}red{% endif %}"> ({% if able %}galima{% else %}negalima{% endif %} gaminti)</span>
                 {% for product in entity.products %}
-                    {{ product.product.title }} id{{ product.product.id }} amount{{ product.amount }}
+                    {{ product.product.title }}
                 {% endfor %}
+
+                {% if role == "ROLE_ADMIN" %}
+                    <a style="float:right" class="btn btn-danger">Ištrinti</a>
+                {% endif %}
+                    <a style="float:right" class="btn btn-primary" href="{{ url('_edit_recipe', {id : entity.id}) }}">Redaguoti</a>
             </li>
 
         {% endfor %}

@@ -1,6 +1,6 @@
 {% extends 'layout.html.twig' %}
 {% block content %}
-    <strong style="font-size: 46px">{{ recipe.title }}</strong><br/>
+    <strong style="font-size: 46px">{{ recipe.title }}</strong><a href="{{ url('_create_menu', {id:recipe.id}) }}" class="btn-primary">Įtraukti į valgiaraštį</a> <br/>
 {% for image in recipe.paths %}
 <img style="margin: 0 0 10px 0;border-radius:10px" src="{{ asset(image) }}" width="180px" height="180px"/>
 
@@ -27,7 +27,7 @@
     <ul class="list-group" style="width: 458px;">
         {% for product in recipe.products %}
             {% set amount = "a"|product_search(product.product.id, fridge.id) %}
-        <li class="list-group-item"><strong>{{ product.product.title }}</strong><span style="float:right;{% if amount >= product.amount %}color:green{% else %}color:red{% endif %}">{{ amount }} / {{ product.amount }} {{ product.product.measurement.shortTitle }}</span></li>
+        <li class="list-group-item"><strong>{{ product.product.title }}</strong><span style="float:right;{% if amount >= product.amount %}color:green{% else %}color:red{% endif %}">{% if amount < product.amount %}(trūksta {{ product.amount-amount }}) {% endif %}{{ amount }} / {{ product.amount }} {{ product.product.measurement.shortTitle }}</span></li>
         {% endfor %}
     </ul>
     </div>

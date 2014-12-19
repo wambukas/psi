@@ -1,0 +1,38 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+    <strong style="font-size: 30px">Receptas</strong><br/>
+    <form method="post" {{ form_enctype(form) }}>
+    <div id="formHolder" style="display: inline-block;padding: 20px;width: 360px;">
+        {{ form_row(form.id) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.portion) }}
+        {{ form_row(form.preparation) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.private) }}
+        {{ form_row(form.file) }}
+        {{ form_row(form.Išsaugoti) }}
+        {{ form_row(form._token) }}
+    </div>
+    <div id="formHolder2" style="display: inline-block;position: absolute;padding: 0 20px 20px 20px;width: 360px;">
+
+        <ul id="itemsHere" style="overflow-y:scroll;height: 360px;" class="list-group">
+            </ul>
+        <button id="add" class="btn btn-primary">Idėti produktą</button>
+    </div>
+    </form>
+    <script type="text/javascript">
+        $("#add").on('click', function(event){
+            event.preventDefault();
+            $.post('{{ url('_add_recipe_items', {'id' : id}) }}', null, function (result) {
+                $('#itemsHere').append(result);
+            })
+        });
+
+        $(document).ready(function(){
+            event.preventDefault();
+            $.post('{{ url('_recipe_items', {'id' : id}) }}', null, function (result) {
+                $('#itemsHere').append(result);
+            })
+        });
+    </script>
+{% endblock %}

@@ -22,9 +22,14 @@ class Menu
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Recipe", mappedBy="id")
+     * @ORM\ManyToOne(targetEntity="\Inteco\KuPRa\DefaultBundle\Entity\User")
      */
-    private $recipes;
+    private $author;
+
+    /**
+     * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="menu")
+     */
+    private $menuItem;
 
     /**
      * Get id
@@ -74,5 +79,61 @@ class Menu
     public function getRecipes()
     {
         return $this->recipes;
+    }
+
+    /**
+     * Set author
+     *
+     * @param \Inteco\KuPRa\DefaultBundle\Entity\User $author
+     * @return Menu
+     */
+    public function setAuthor(\Inteco\KuPRa\DefaultBundle\Entity\User $author = null)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return \Inteco\KuPRa\DefaultBundle\Entity\User 
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * Add menuItem
+     *
+     * @param \Inteco\KuPRa\FridgeBundle\Entity\MenuItem $menuItem
+     * @return Menu
+     */
+    public function addMenuItem(\Inteco\KuPRa\FridgeBundle\Entity\MenuItem $menuItem)
+    {
+        $this->menuItem[] = $menuItem;
+
+        return $this;
+    }
+
+    /**
+     * Remove menuItem
+     *
+     * @param \Inteco\KuPRa\FridgeBundle\Entity\MenuItem $menuItem
+     */
+    public function removeMenuItem(\Inteco\KuPRa\FridgeBundle\Entity\MenuItem $menuItem)
+    {
+        $this->menuItem->removeElement($menuItem);
+    }
+
+    /**
+     * Get menuItem
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMenuItem()
+    {
+        return $this->menuItem;
     }
 }

@@ -1,0 +1,10 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+    <ul style="overflow-y:scroll;height: 236px;" class="list-group">
+        {% for user in users %}
+        <li class="list-group-item" >
+            <img src="{% if user.path %}{{ asset(user.path) }}{% else %}{{ asset('bundles/intecokupradefault/images/profile.png') }}{% endif %}" width="64px" height="64px"/> <span>{{ user.name }} {{ user.surname }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+{% endblock %}

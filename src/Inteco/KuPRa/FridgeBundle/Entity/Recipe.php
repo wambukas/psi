@@ -76,6 +76,12 @@ class Recipe
     private $paths;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="private", type="boolean", nullable=true)
+     */
+    private $private;
+    /**
      * Get id
      *
      * @return integer 
@@ -295,5 +301,28 @@ class Recipe
     public function __toString()
     {
         return $this->title;
+    }
+
+    /**
+     * Set private
+     *
+     * @param boolean $private
+     * @return Recipe
+     */
+    public function setPrivate($private)
+    {
+        $this->private = $private;
+
+        return $this;
+    }
+
+    /**
+     * Get private
+     *
+     * @return boolean 
+     */
+    public function getPrivate()
+    {
+        return $this->private;
     }
 }

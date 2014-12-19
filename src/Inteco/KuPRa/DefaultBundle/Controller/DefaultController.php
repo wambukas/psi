@@ -37,6 +37,18 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/list", name="_list")
+     * @Template("IntecoKuPRaDefaultBundle:Default:list.html.twig")
+     */
+    public function listAction()
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $users = $em->getRepository('IntecoKuPRaDefaultBundle:User')->findAll();
+
+        return ['users' => $users];
+    }
+
+    /**
      * @Route("/", name="_title")
      * @Template("IntecoKuPRaDefaultBundle:Default:title.html.twig")
      */
