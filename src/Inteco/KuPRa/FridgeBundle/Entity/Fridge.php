@@ -27,6 +27,11 @@ class Fridge
     private $author;
 
     /**
+     * @ORM\OneToMany(targetEntity="FridgeItem", mappedBy="fridge")
+     */
+    private $products;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -64,5 +69,45 @@ class Fridge
     public function __toString()
     {
         return $this->author->getNickname();
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add products
+     *
+     * @param \Inteco\KuPRa\FridgeBundle\Entity\FridgeItem $products
+     * @return Fridge
+     */
+    public function addProduct(\Inteco\KuPRa\FridgeBundle\Entity\FridgeItem $products)
+    {
+        $this->products[] = $products;
+
+        return $this;
+    }
+
+    /**
+     * Remove products
+     *
+     * @param \Inteco\KuPRa\FridgeBundle\Entity\FridgeItem $products
+     */
+    public function removeProduct(\Inteco\KuPRa\FridgeBundle\Entity\FridgeItem $products)
+    {
+        $this->products->removeElement($products);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProducts()
+    {
+        return $this->products;
     }
 }

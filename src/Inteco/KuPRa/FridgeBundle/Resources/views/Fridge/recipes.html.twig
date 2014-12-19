@@ -4,7 +4,14 @@
     <a href="{{ url('_create_recipe') }}">Kurti</a>
     <ul style="overflow-y:scroll;height: 236px;" class="list-group">
         {% for entity in entities %}
-            <li class="list-group-item" style="height: 75px">{{ entity.title }}</li>
+
+            <li class="list-group-item" style="height: 75px"><img src="{{ asset(entity.paths.0) }}" height="55" width="55px" style="padding: 0 5px 0 0"/>
+                <a href="{{ url('_view_recipe', {'id' : entity.id}) }}"><strong>{{ entity.title }}</strong></a>
+                {% for product in entity.products %}
+                    {{ product.product.title }} id{{ product.product.id }} amount{{ product.amount }}
+                {% endfor %}
+            </li>
+
         {% endfor %}
     </ul>
 {% endblock %}

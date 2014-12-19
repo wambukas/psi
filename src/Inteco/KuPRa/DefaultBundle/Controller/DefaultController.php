@@ -30,7 +30,6 @@ class DefaultController extends Controller
     {
         $session = $this->get('session');
         $user = $session->get('user');
-
         if($user === NULL){
             return $this->redirect($this->generateUrl('_title'));
         }
@@ -47,7 +46,7 @@ class DefaultController extends Controller
         $user = $session->get('user');
 
         if($user !== NULL){
-            return $this->redirect($this->generateUrl('_title'));
+            return $this->redirect($this->generateUrl('_default'));
         }
 
         $userEntity = new User();

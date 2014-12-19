@@ -15,6 +15,7 @@ use Inteco\KuPRa\FridgeBundle\Form\MeasurementType;
 use Inteco\KuPRa\FridgeBundle\Form\ProductType;
 use Inteco\KuPRa\FridgeBundle\Form\RecipeItemType;
 use Inteco\KuPRa\FridgeBundle\Form\RecipeType;
+use Inteco\KuPRa\FridgeBundle\Form\StarType;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\Request;
@@ -244,9 +245,29 @@ class FridgeController extends Controller
      */
     public function recipesAction()
     {
+        $this->_checkRecipes();
         $em = $this->getDoctrine()->getEntityManager();
         $entities = $em->getRepository('IntecoKuPRaFridgeBundle:Recipe')->findAll();
-        return ['entities' => $entities];
+        $session = $this->get('session');
+        $userId = $session->get('user');
+        $fridge = $em->getRepository('IntecoKuPRaFridgeBundle:Fridge')->findOneBy(['author' => $userId]);
+        return ['entities' => $entities, 'fridge' => $fridge];
+    }
+
+    /**
+     * @Route("/recipe/view/{id}", name="_view_recipe")
+     * @Template("IntecoKuPRaFridgeBundle:Fridge:view.html.twig")
+     */
+    public function viewRecipeAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $session = $this->get('session');
+        $userId = $session->get('user');
+        $fridge = $em->getRepository('IntecoKuPRaFridgeBundle:Fridge')->findOneBy(['author' => $userId]);
+        $recipe = $em->getRepository('IntecoKuPRaFridgeBundle:Recipe')->findOneById($id);
+        $able = $this->_checkIfAble($recipe->getId());
+        $form = $this->createForm(new StarType());
+        return ['recipe' => $recipe, 'fridge' => $fridge, 'able' => $able, 'form' => $form->createView()];
     }
 
     /**
@@ -360,6 +381,23 @@ class FridgeController extends Controller
         }
     }
 
+    private function _checkRecipes()
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $entities = $em->getRepository('IntecoKuPRaFridgeBundle:Recipe')->findAll();
+        foreach($entities as $entity){
+            $title = $entity->getTitle();
+            if(empty($title)){
+                foreach($entity->getProducts() as $product){
+                    $em->remove($product);
+                    $em->flush();
+                }
+                $em->remove($entity);
+                $em->flush();
+            }
+        }
+    }
+
     private function _getFridge()
     {
         $session = $this->get('session');
@@ -380,5 +418,25 @@ class FridgeController extends Controller
         } else {
             return null;
         }
+    }
+
+    private function _checkIfAble($id)
+    {
+        $able = true;
+        $em = $this->getDoctrine()->getEntityManager();
+        $session = $this->get('session');
+        $userId = $session->get('user');
+        $userRepository = $this->get('repository.user');
+        $user = $userRepository->findOneBy(['id' => $userId]);
+        $fridgeRepository = $this->get('repository.fridge');
+        $fridge = $fridgeRepository->findOneBy(array('author' => $user));
+        $items = $em->getRepository('IntecoKuPRaFridgeBundle:RecipeItem')->findBy(['recipe' => $id]);
+        foreach($items as $item){
+            $product = $em->getRepository('IntecoKuPRaFridgeBundle:FridgeItem')->findOneBy(['fridge' => $fridge, 'product' => $item->getProduct()]);
+            if(empty($product) || ($product->getAmount() < $item->getAmount())){
+                $able = false;
+            }
+        }
+        return $able;
     }
 }

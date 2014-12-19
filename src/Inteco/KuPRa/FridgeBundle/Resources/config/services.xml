@@ -7,9 +7,14 @@
     <services>
         <!--Repai-->
         <service id="repository.fridge"
-                 class="Inteco\KuPRa\DefaultBundle\Entity\FridgeRepository"
+                 class="Inteco\KuPRa\FridgeBundle\Entity\FridgeRepository"
                  factory-service="doctrine" factory-method="getRepository">
             <argument>IntecoKuPRaFridgeBundle:Fridge</argument>
+        </service>
+
+        <service id="inteco.product_extension" class="Inteco\KuPRa\FridgeBundle\Twig\ProductExtension">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <tag name="twig.extension" />
         </service>
     </services>
 </container>

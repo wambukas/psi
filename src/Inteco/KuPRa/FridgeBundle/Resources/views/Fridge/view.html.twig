@@ -1,0 +1,48 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+    <strong style="font-size: 46px">{{ recipe.title }}</strong><br/>
+{% for image in recipe.paths %}
+<img style="margin: 0 0 10px 0;border-radius:10px" src="{{ asset(image) }}" width="180px" height="180px"/>
+
+{% endfor %}
+    <br/>
+    <div>
+    <div style="display: inline-block;">
+        <div style="padding:10px;width: 458px">
+        <strong>Aprašymas: </strong><span>{{ recipe.description }}aaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa</span>
+        </div>
+
+        <div style="padding:10px;width: 458px">
+            <strong>Porcijų: </strong><span>{{ recipe.portion }} {% if recipe.portion > 1 %}asmenim{% else %}asmeniui{% endif %}</span>
+        </div>
+
+        <div style="padding:10px;width: 458px">
+            <strong>Trukmė: </strong><span>{{ recipe.preparation }} min.</span>
+        </div>
+    </div>
+
+    <div style="display: inline-block;vertical-align: top">
+    <ul class="list-group" style="width: 458px;">
+        {% for product in recipe.products %}
+            {% set amount = "a"|product_search(product.product.id, fridge.id) %}
+        <li class="list-group-item"><strong>{{ product.product.title }}</strong><span style="float:right;{% if amount >= product.amount %}color:green{% else %}color:red{% endif %}">{{ amount }} / {{ product.amount }} {{ product.product.measurement.shortTitle }}</span></li>
+        {% endfor %}
+    </ul>
+    </div>
+        {% if able == true %}
+        <div>
+            <form method="post" action="">
+            <button style="float:right" type="submit" class="btn btn-primary">Gaminti</button>
+                <div style="float:right; padding: 0 10px 10px 0;position: relative;top: -25px;">
+                    {{ form_row(form.stars) }}
+                    {{ form_row(form._token) }}
+                </div>
+            </form>
+        </div>
+        {% else %}
+            <div>
+                <button style="float:right" class="btn btn-danger">Negalima</button>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
