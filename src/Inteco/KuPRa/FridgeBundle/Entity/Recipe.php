@@ -291,4 +291,9 @@ class Recipe
         $this->id = $id;
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->title;
+    }
 }

@@ -22,6 +22,16 @@ class StarType extends AbstractType
     }
 
     /**
+     * @param OptionsResolverInterface $resolver
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'Inteco\KuPRa\FridgeBundle\Entity\Star'
+        ));
+    }
+
+    /**
      * @return string
      */
     public function getName()

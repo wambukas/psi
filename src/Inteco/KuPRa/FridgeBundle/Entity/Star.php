@@ -28,6 +28,10 @@ class Star
      */
     private $stars;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Recipe", cascade={"persist"})
+     */
+    private $recipe;
 
     /**
      * Get id
@@ -60,5 +64,28 @@ class Star
     public function getStars()
     {
         return $this->stars;
+    }
+
+    /**
+     * Set recipe
+     *
+     * @param \Inteco\KuPRa\FridgeBundle\Entity\Recipe $recipe
+     * @return Star
+     */
+    public function setRecipe(\Inteco\KuPRa\FridgeBundle\Entity\Recipe $recipe = null)
+    {
+        $this->recipe = $recipe;
+
+        return $this;
+    }
+
+    /**
+     * Get recipe
+     *
+     * @return \Inteco\KuPRa\FridgeBundle\Entity\Recipe 
+     */
+    public function getRecipe()
+    {
+        return $this->recipe;
     }
 }

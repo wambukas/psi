@@ -10,6 +10,7 @@ use Inteco\KuPRa\FridgeBundle\Entity\Measurement;
 use Inteco\KuPRa\FridgeBundle\Entity\Product;
 use Inteco\KuPRa\FridgeBundle\Entity\Recipe;
 use Inteco\KuPRa\FridgeBundle\Entity\RecipeItem;
+use Inteco\KuPRa\FridgeBundle\Entity\Star;
 use Inteco\KuPRa\FridgeBundle\Form\FridgeItemType;
 use Inteco\KuPRa\FridgeBundle\Form\MeasurementType;
 use Inteco\KuPRa\FridgeBundle\Form\ProductType;
@@ -265,9 +266,55 @@ class FridgeController extends Controller
         $userId = $session->get('user');
         $fridge = $em->getRepository('IntecoKuPRaFridgeBundle:Fridge')->findOneBy(['author' => $userId]);
         $recipe = $em->getRepository('IntecoKuPRaFridgeBundle:Recipe')->findOneById($id);
+        $stars = $em->getRepository('IntecoKuPRaFridgeBundle:Star')->findBy(['recipe' => $recipe]);
+        $average = 0;
+        foreach($stars as $starValue){
+            $average = $average + $starValue->getStars();
+        }
+        if($average != 0) {
+            $average = $average/count($stars);
+        } else {
+            $average = "Dar nėra";
+        }
+
         $able = $this->_checkIfAble($recipe->getId());
-        $form = $this->createForm(new StarType());
-        return ['recipe' => $recipe, 'fridge' => $fridge, 'able' => $able, 'form' => $form->createView()];
+        $star = new Star();
+        $form = $this->createForm(new StarType(), $star);
+        return ['recipe' => $recipe, 'fridge' => $fridge, 'able' => $able, 'form' => $form->createView(), 'average' => $average];
+    }
+
+    /**
+     * @Route("/recipe/cook/{id}", name="_cook_recipe")
+     */
+    public function cookAction($id)
+    {
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $session = $this->get('session');
+        $userId = $session->get('user');
+        $userRepository = $this->get('repository.user');
+        $user = $userRepository->findOneBy(['id' => $userId]);
+        $fridgeRepository = $this->get('repository.fridge');
+        $fridge = $fridgeRepository->findOneBy(array('author' => $user));
+        $recipe = $em->getRepository('IntecoKuPRaFridgeBundle:Recipe')->findOneById($id);
+        $items = $em->getRepository('IntecoKuPRaFridgeBundle:RecipeItem')->findBy(['recipe' => $id]);
+        $star = new Star();
+        $form = $this->createForm(new StarType(), $star);
+        if ($this->getRequest()->isMethod('POST')) {
+            $form->submit($this->getRequest());
+            $star->setRecipe($recipe);
+            $em->persist($star);
+            $em->flush();
+        }
+        foreach($items as $item){
+            $product = $em->getRepository('IntecoKuPRaFridgeBundle:FridgeItem')->findOneBy(['fridge' => $fridge, 'product' => $item->getProduct()]);
+            if(!empty($product) && ($product->getAmount() >= $item->getAmount())){
+                $product->setAmount($product->getAmount() - $item->getAmount());
+                $em->persist($product);
+                $em->flush();
+            }
+        }
+        return $this->redirect($this->generateUrl('_view_recipe', ['id' => $id]));
     }
 
     /**

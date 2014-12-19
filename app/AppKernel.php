@@ -23,7 +23,8 @@ class AppKernel extends Kernel
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new \Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
-
+            new ADesigns\CalendarBundle\ADesignsCalendarBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

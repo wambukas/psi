@@ -28,7 +28,9 @@
         "knplabs/knp-menu-bundle": "2.0.*@dev",
         "avalanche123/imagine-bundle": "v2.1.2",
         "blueimp/jquery-file-upload": "*",
-        "vich/uploader-bundle": "1.0.*@dev"
+        "vich/uploader-bundle": "1.0.*@dev",
+        "friendsofsymfony/jsrouting-bundle": "~1.5",
+        "adesigns/calendar-bundle": "~1.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
