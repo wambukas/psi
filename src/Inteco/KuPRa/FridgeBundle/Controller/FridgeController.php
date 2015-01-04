@@ -379,24 +379,34 @@ class FridgeController extends Controller
             $data = $this->getRequest()->request->get('inteco_kupra_fridgebundle_recipeitem_product');
             if(!empty($data)){
                 foreach($data as $item){
-                    $product = $em->getRepository('IntecoKuPRaFridgeBundle:RecipeItem')->findOneById($item['id']);
-                    $product->setProduct($em->getRepository('IntecoKuPRaFridgeBundle:Product')->findOneById($item['product']));
-                    $product->setAmount($item['amount']);
-                    $em->persist($product);
-                    $em->flush();
+
+                    $exists = $em->getRepository('IntecoKuPRaFridgeBundle:Product')->findOneById($item['product']);
+                    if(!empty($exists)){
+                        $product = $em->getRepository('IntecoKuPRaFridgeBundle:RecipeItem')->findOneById($item['id']);
+                        $product->setProduct($exists);
+                        $product->setAmount($item['amount']);
+                        $em->persist($product);
+                        $em->flush();
+                    } else {
+                        $product = $em->getRepository('IntecoKuPRaFridgeBundle:RecipeItem')->findOneById($item['id']);
+                        $em->remove($product);
+                        $em->flush();
+                    }
                 }
             $images = $recipe->getFile();
             $recipe->setPaths([]);
             $recipe->setAuthor($user);
                 if(!empty($images)){
                     foreach($images as $image){
-                        if(!$fs->exists('/home/wambo/Projects/psi/src/Inteco/KuPRa/FridgeBundle/Resources/public/images'.$image->getClientOriginalName())){
-                            $image->move(
-                                '/home/wambo/Projects/psi/src/Inteco/KuPRa/FridgeBundle/Resources/public/images',
-                                $image->getClientOriginalName()
-                            );
+                        if(!empty($image)){
+                            if(!$fs->exists('/home/wambo/Projects/psi/src/Inteco/KuPRa/FridgeBundle/Resources/public/images'.$image->getClientOriginalName())){
+                                $image->move(
+                                    '/home/wambo/Projects/psi/src/Inteco/KuPRa/FridgeBundle/Resources/public/images',
+                                    $image->getClientOriginalName()
+                                );
+                            }
+                            $recipe->addPaths('bundles/intecokuprafridge/images/'.$image->getClientOriginalName());
                         }
-                        $recipe->addPaths('bundles/intecokuprafridge/images/'.$image->getClientOriginalName());
                     }
                 }
             $em->persist($recipe);
@@ -431,23 +441,32 @@ class FridgeController extends Controller
             $data = $this->getRequest()->request->get('inteco_kupra_fridgebundle_recipeitem_product');
             if(!empty($data)){
                 foreach($data as $item){
-                    $product = $em->getRepository('IntecoKuPRaFridgeBundle:RecipeItem')->findOneById($item['id']);
-                    $product->setProduct($em->getRepository('IntecoKuPRaFridgeBundle:Product')->findOneById($item['product']));
-                    $product->setAmount($item['amount']);
-                    $em->persist($product);
-                    $em->flush();
+                    $exists = $em->getRepository('IntecoKuPRaFridgeBundle:Product')->findOneById($item['product']);
+                    if(!empty($exists)){
+                        $product = $em->getRepository('IntecoKuPRaFridgeBundle:RecipeItem')->findOneById($item['id']);
+                        $product->setProduct($exists);
+                        $product->setAmount($item['amount']);
+                        $em->persist($product);
+                        $em->flush();
+                    } else {
+                        $product = $em->getRepository('IntecoKuPRaFridgeBundle:RecipeItem')->findOneById($item['id']);
+                        $em->remove($product);
+                        $em->flush();
+                    }
                 }
                 $images = $recipe->getFile();
                 $recipe->setPaths([]);
                 $recipe->setAuthor($user);
                 foreach($images as $image){
-                    if(!$fs->exists('/home/wambo/Projects/psi/src/Inteco/KuPRa/FridgeBundle/Resources/public/images'.$image->getClientOriginalName())){
-                        $image->move(
-                            '/home/wambo/Projects/psi/src/Inteco/KuPRa/FridgeBundle/Resources/public/images',
-                            $image->getClientOriginalName()
-                        );
+                    if(!empty($image)){
+                        if(!$fs->exists('/home/wambo/Projects/psi/src/Inteco/KuPRa/FridgeBundle/Resources/public/images'.$image->getClientOriginalName())){
+                            $image->move(
+                                '/home/wambo/Projects/psi/src/Inteco/KuPRa/FridgeBundle/Resources/public/images',
+                                $image->getClientOriginalName()
+                            );
+                        }
+                        $recipe->addPaths('bundles/intecokuprafridge/images/'.$image->getClientOriginalName());
                     }
-                    $recipe->addPaths('bundles/intecokuprafridge/images/'.$image->getClientOriginalName());
                 }
                 $em->persist($recipe);
                 $em->flush();
