@@ -513,6 +513,40 @@ class FridgeController extends Controller
     }
 
     /**
+     * @Route("/menu/change", name="_change_menu")
+     * @Template("IntecoKuPRaFridgeBundle:Fridge:menu.html.twig")
+     */
+    public function changeMenuAction()
+    {
+        $session = $this->get('session');
+        $userId = $session->get('user');
+        $em = $this->getDoctrine()->getEntityManager();
+        $fridge = $em->getRepository('IntecoKuPRaFridgeBundle:Fridge')->findOneBy(['author' => $userId]);
+
+        $data = $this->getRequest()->get('product');
+        foreach($data as $key => $value){
+            $fridgeItem = $em->getRepository('IntecoKuPRaFridgeBundle:FridgeItem')->findOneBy(['fridge' => $fridge, 'product' => $key]);
+            if(!empty($fridgeItem)){
+                if($value > 0 || $fridgeItem->getAmount() >= $value){
+                    $fridgeItem->setAmount($fridgeItem->getAmount() + $value);
+                    $em->persist($fridgeItem);
+                    $em->flush();
+                }
+            } else {
+                if($value > 0) {
+                    $fridgeItem = new FridgeItem();
+                    $fridgeItem->setFridge($fridge);
+                    $fridgeItem->setProduct($em->getRepository('IntecoKuPRaFridgeBundle:Product')->findOneById($key));
+                    $fridgeItem->setAmount($value);
+                    $em->persist($fridgeItem);
+                    $em->flush();
+                }
+            }
+        }
+        return $this->redirect($this->generateUrl('_menu'));
+    }
+
+    /**
      * @Route("/menu", name="_menu")
      * @Template("IntecoKuPRaFridgeBundle:Fridge:menu.html.twig")
      */
@@ -544,7 +578,6 @@ class FridgeController extends Controller
                 $needed[$key] = $item - $fridgeItem->getAmount();
             }
         }
-
         return ['menu' => $menuItems, 'needed' => $needed];
     }
 

@@ -13,12 +13,17 @@
     </ul>
     <strong style="font-size: 36px">Trukstami produktai</strong>
     <ul class="list-group" style="width: 458px;">
+        <form action="{{ url('_change_menu') }}" method="get">
     {% for key, item in needed %}
     <li class="list-group-item">
         <strong>Produktas:</strong> {{ "a"|product_name(key) }}
         <strong>Kiek trūksta:</strong> {{ item }} </br>
-        <strong>Papildyti kiekiu:</strong> <input style="width: 120px;display: inline-block" type="number" class="form-control" />
+        <strong>Papildyti kiekiu:</strong> <input style="width: 120px;display: inline-block" type="number" name="product[{{ key }}]" class="form-control" />
     </li>
         {% endfor %}
+            <div style="padding: 5px" >
+            <button type="submit" class="btn btn-primary">Papildyti</button>
+            </div>
+        </form>
     </ul>
 {% endblock %}

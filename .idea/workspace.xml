@@ -96,9 +96,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Controller/FridgeController.php" afterPath="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Controller/FridgeController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/logs/dev.log" afterPath="$PROJECT_DIR$/app/logs/dev.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/views/Fridge/menu.html.twig" afterPath="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/views/Fridge/menu.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/logs/prod.log" afterPath="$PROJECT_DIR$/app/logs/prod.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/views/Fridge/recipes.html.twig" afterPath="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/views/Fridge/recipes.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="psi.iws" />
@@ -125,16 +122,16 @@
       <file leaf-file-name="recipes.html.twig" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/views/Fridge/recipes.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="41" selection-start="872" selection-end="872" vertical-scroll-proportion="-7.3333335" vertical-offset="0" max-vertical-offset="540">
+            <state line="3" column="40" selection-start="132" selection-end="159" vertical-scroll-proportion="-2.0" vertical-offset="0" max-vertical-offset="540">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FridgeController.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="FridgeController.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Controller/FridgeController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="450" column="22" selection-start="19299" selection-end="19299" vertical-scroll-proportion="-4.4698796" vertical-offset="7261" max-vertical-offset="11232">
+            <state line="544" column="9" selection-start="23243" selection-end="23243" vertical-scroll-proportion="0.8937729" vertical-offset="8836" max-vertical-offset="11826">
               <folding />
             </state>
           </provider>
@@ -158,22 +155,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Menu.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Entity/Menu.php">
+      <file leaf-file-name="menu.html.twig" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/views/Fridge/menu.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="13" selection-start="623" selection-end="623" vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="2610">
+            <state line="23" column="34" selection-start="1115" selection-end="1115" vertical-scroll-proportion="-15.333333" vertical-offset="0" max-vertical-offset="612">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="menu.html.twig" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/views/Fridge/menu.html.twig">
+      <file leaf-file-name="profile.html.twig" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/DefaultBundle/Resources/views/Default/profile.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="105" selection-start="935" selection-end="935" vertical-scroll-proportion="0.59375" vertical-offset="0" max-vertical-offset="576">
-              <folding>
-                <element signature="e#880#922#0" expanded="true" />
-              </folding>
+            <state line="12" column="73" selection-start="763" selection-end="800" vertical-scroll-proportion="1.8947369" vertical-offset="324" max-vertical-offset="1296">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -181,7 +176,7 @@
       <file leaf-file-name="MenuItemType.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Form/MenuItemType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="5" selection-start="629" selection-end="629" vertical-scroll-proportion="-4.4814816" vertical-offset="221" max-vertical-offset="810">
+            <state line="21" column="5" selection-start="629" selection-end="629" vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="846">
               <folding />
             </state>
           </provider>
@@ -190,7 +185,7 @@
       <file leaf-file-name="createMenu.html.twig" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/views/Fridge/createMenu.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="68" selection-start="121" selection-end="121" vertical-scroll-proportion="0.0" vertical-offset="36" max-vertical-offset="180">
+            <state line="2" column="68" selection-start="121" selection-end="121" vertical-scroll-proportion="-1.3333334" vertical-offset="0" max-vertical-offset="180">
               <folding />
             </state>
           </provider>
@@ -208,7 +203,7 @@
       <file leaf-file-name="RecipeItem.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Entity/RecipeItem.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="65" selection-start="603" selection-end="603" vertical-scroll-proportion="-9.333333" vertical-offset="306" max-vertical-offset="2250">
+            <state line="31" column="65" selection-start="603" selection-end="603" vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="2250">
               <folding />
             </state>
           </provider>
@@ -276,8 +271,8 @@
         <option value="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Twig/ProductExtension.php" />
         <option value="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Form/MenuItemType.php" />
         <option value="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/views/Fridge/recipes.html.twig" />
-        <option value="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Controller/FridgeController.php" />
         <option value="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/views/Fridge/menu.html.twig" />
+        <option value="$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Controller/FridgeController.php" />
       </list>
     </option>
   </component>
@@ -314,7 +309,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -368,8 +362,30 @@
               <option name="myItemId" value="KuPRa" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="FridgeBundle" />
+              <option name="myItemId" value="psi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="psi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Inteco" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="KuPRa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DefaultBundle" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -395,7 +411,41 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="FridgeBundle" />
+              <option name="myItemId" value="DefaultBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="psi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="psi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Inteco" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="KuPRa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DefaultBundle" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -407,7 +457,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Fridge" />
+              <option name="myItemId" value="Default" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -433,7 +483,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="FridgeBundle" />
+              <option name="myItemId" value="DefaultBundle" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -441,60 +491,9 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="psi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="psi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Inteco" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="KuPRa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FridgeBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Entity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="psi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="psi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Inteco" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="KuPRa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -582,8 +581,8 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33084947" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -604,7 +603,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Controller/FridgeController.php</url>
-          <line>525</line>
+          <line>559</line>
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="1" />
@@ -654,11 +653,6 @@
     <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Tests/Controller/DefaultControllerTest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="591" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/DefaultBundle/Resources/views/Default/profile.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="99" selection-start="2077" selection-end="2164" vertical-scroll-proportion="-14.666667" vertical-offset="324" max-vertical-offset="1296" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/DefaultBundle/Resources/config/services.xml">
@@ -818,13 +812,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/views/Fridge/createMenu.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="68" selection-start="121" selection-end="121" vertical-scroll-proportion="0.0" vertical-offset="36" max-vertical-offset="180">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Entity/Menu.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="34" column="13" selection-start="623" selection-end="623" vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="2610">
@@ -855,38 +842,50 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Form/MenuItemType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="5" selection-start="629" selection-end="629" vertical-scroll-proportion="-4.4814816" vertical-offset="221" max-vertical-offset="810">
+        <state line="21" column="5" selection-start="629" selection-end="629" vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="846">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Entity/RecipeItem.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="65" selection-start="603" selection-end="603" vertical-scroll-proportion="-9.333333" vertical-offset="306" max-vertical-offset="2250">
+        <state line="31" column="65" selection-start="603" selection-end="603" vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="2250">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/views/Fridge/createMenu.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="68" selection-start="121" selection-end="121" vertical-scroll-proportion="-1.3333334" vertical-offset="0" max-vertical-offset="180">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/views/Fridge/recipes.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="41" selection-start="872" selection-end="872" vertical-scroll-proportion="-7.3333335" vertical-offset="0" max-vertical-offset="540">
+        <state line="3" column="40" selection-start="132" selection-end="159" vertical-scroll-proportion="-2.0" vertical-offset="0" max-vertical-offset="540">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Controller/FridgeController.php">
+    <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/DefaultBundle/Resources/views/Default/profile.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="450" column="22" selection-start="19299" selection-end="19299" vertical-scroll-proportion="-4.4698796" vertical-offset="7261" max-vertical-offset="11232">
+        <state line="12" column="73" selection-start="763" selection-end="800" vertical-scroll-proportion="1.8947369" vertical-offset="324" max-vertical-offset="1296">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Resources/views/Fridge/menu.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="105" selection-start="935" selection-end="935" vertical-scroll-proportion="0.59375" vertical-offset="0" max-vertical-offset="576">
-          <folding>
-            <element signature="e#880#922#0" expanded="true" />
-          </folding>
+        <state line="23" column="34" selection-start="1115" selection-end="1115" vertical-scroll-proportion="-15.333333" vertical-offset="0" max-vertical-offset="612">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Inteco/KuPRa/FridgeBundle/Controller/FridgeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="544" column="9" selection-start="23243" selection-end="23243" vertical-scroll-proportion="0.8937729" vertical-offset="8836" max-vertical-offset="11826">
+          <folding />
         </state>
       </provider>
     </entry>
